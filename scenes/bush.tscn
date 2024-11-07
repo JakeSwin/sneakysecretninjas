@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/bush.gd" id="1_fa73i"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aek6i"]
+radius = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hldqx"]
 albedo_color = Color(0, 0.596035, 0.22958, 1)
