@@ -2,7 +2,6 @@ extends Button
 
 var cooldown = false
 
-
 func _on_pressed():
 	if cooldown == false:
 		$Label/Timer.start()

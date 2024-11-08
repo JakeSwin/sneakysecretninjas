@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Texture2D" uid="uid://i4wogwnjpmsj" path="res://assets/Untitled2.png" id="1_r1pfj"]
-[ext_resource type="Script" path="res://scenes/le_button.gd" id="2_mnhkx"]
+[ext_resource type="Script" path="res://scenes/shuriken.gd" id="2_o8vlt"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,29 +11,29 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LeButton" type="Button" parent="."]
+[node name="Shuriken" type="Button" parent="."]
 layout_mode = 0
 offset_top = -4.0
 offset_right = 471.0
 offset_bottom = 401.0
 icon = ExtResource("1_r1pfj")
 expand_icon = true
-script = ExtResource("2_mnhkx")
+script = ExtResource("2_o8vlt")
 
-[node name="Label" type="Label" parent="LeButton"]
+[node name="Label" type="Label" parent="Shuriken"]
 layout_mode = 0
 offset_left = 7.0
 offset_top = 407.0
 offset_right = 471.0
 offset_bottom = 544.0
 
-[node name="Timer" type="Timer" parent="LeButton/Label"]
+[node name="Timer" type="Timer" parent="Shuriken/Label"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Timer2" type="Timer" parent="LeButton/Label"]
+[node name="Timer2" type="Timer" parent="Shuriken/Label"]
 wait_time = 0.1
 
-[connection signal="pressed" from="LeButton" to="LeButton" method="_on_pressed"]
-[connection signal="timeout" from="LeButton/Label/Timer" to="LeButton" method="_on_timer_timeout"]
-[connection signal="timeout" from="LeButton/Label/Timer2" to="LeButton" method="_on_timer_2_timeout"]
+[connection signal="pressed" from="Shuriken" to="Shuriken" method="_on_pressed"]
+[connection signal="timeout" from="Shuriken/Label/Timer" to="Shuriken" method="_on_timer_timeout"]
+[connection signal="timeout" from="Shuriken/Label/Timer2" to="Shuriken" method="_on_timer_2_timeout"]
