@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://mhhybwws8xbt"]
+
+[ext_resource type="Script" path="res://scripts/bush.gd" id="1_fa73i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aek6i"]
+radius = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hldqx"]
+albedo_color = Color(0, 0.596035, 0.22958, 1)
+
+[node name="Bush" type="StaticBody3D"]
+script = ExtResource("1_fa73i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_aek6i")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hldqx")
+radius = 0.8
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
