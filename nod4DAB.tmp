@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8xex23fcqoug"]
+
+[ext_resource type="Script" path="res://Ground.gd" id="1_2igq7"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kccqn"]
+
+[node name="Ground" type="MeshInstance3D"]
+mesh = SubResource("PlaneMesh_kccqn")
+script = ExtResource("1_2igq7")
