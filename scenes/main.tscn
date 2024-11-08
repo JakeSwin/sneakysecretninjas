@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7sn86ho1rusg"]
+[gd_scene load_steps=10 format=3 uid="uid://c7sn86ho1rusg"]
 
 [ext_resource type="PackedScene" uid="uid://mhhybwws8xbt" path="res://scenes/bush.tscn" id="1_omau3"]
-[ext_resource type="PackedScene" uid="uid://b3b6osfqjb6p4" path="res://scenes/player.tscn" id="2_4fugd"]
 [ext_resource type="Script" path="res://scripts/movement_test.gd" id="2_5cqro"]
+[ext_resource type="PackedScene" uid="uid://cycmu30tvnqes" path="res://assets/ninja2.glb" id="4_wgx6r"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="5_ckby2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0unes"]
 
@@ -31,10 +32,6 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 5.5)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.307572, 0.951525, 0, -0.951525, 0.307572, 0, 0, 0)
 
-[node name="Player" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("2_4fugd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-target_node = NodePath("../Tile/Bushes/Bush")
-
 [node name="Tile" type="Node3D" parent="."]
 script = ExtResource("2_5cqro")
 
@@ -55,3 +52,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
 
 [node name="Bush4" parent="Tile/Bushes" instance=ExtResource("1_omau3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+
+[node name="Ninja" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("4_wgx6r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+script = ExtResource("5_ckby2")
+target_node = NodePath("../Tile/Bushes/Bush")
