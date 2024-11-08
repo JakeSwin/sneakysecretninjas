@@ -5,7 +5,7 @@
 [node name="Main" type="Node3D"]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 20, 0)
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 10, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 

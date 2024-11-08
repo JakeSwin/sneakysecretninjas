@@ -29,7 +29,7 @@ func _on_Timer_timeout():
 	spawn_bushes(new_ground)
 
 func spawn_bushes(ground):
-	var bush_count = 20  
+	var bush_count = 100  
 	var plane_width = 5  
 	var plane_length = 50
 	
