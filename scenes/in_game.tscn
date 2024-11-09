@@ -1,39 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://hflp43gvv8km"]
+[gd_scene load_steps=7 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Texture2D" uid="uid://i4wogwnjpmsj" path="res://assets/Untitled2.png" id="1_r1pfj"]
 [ext_resource type="Script" path="res://scenes/shuriken.gd" id="2_o8vlt"]
+[ext_resource type="Script" path="res://scenes/smoke_bomb.gd" id="2_rgn3x"]
+
+[sub_resource type="Shortcut" id="Shortcut_vy1b1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7j4te"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1rmh"]
+bg_color = Color(0.21, 0.21, 0.21, 0.462745)
 
 [node name="Control" type="Control"]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Shuriken" type="Button" parent="."]
-layout_mode = 0
-offset_top = -4.0
-offset_right = 471.0
-offset_bottom = 401.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+anchor_top = 0.745
+anchor_right = 0.982
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -482.76
+offset_right = 16.736
+offset_bottom = 2.0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Shuriken" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_vy1b1")
 icon = ExtResource("1_r1pfj")
-expand_icon = true
+flat = true
 script = ExtResource("2_o8vlt")
 
-[node name="Label" type="Label" parent="Shuriken"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 407.0
-offset_right = 471.0
-offset_bottom = 544.0
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/Shuriken"]
+visible = false
+layout_mode = 2
+offset_right = 211.0
+offset_bottom = 182.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_7j4te")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i1rmh")
+max_value = 2.0
+show_percentage = false
 
-[node name="Timer" type="Timer" parent="Shuriken/Label"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Shuriken"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 209.0
+offset_bottom = 179.0
+
+[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer/Shuriken/Label"]
 wait_time = 2.0
 one_shot = true
 
-[node name="Timer2" type="Timer" parent="Shuriken/Label"]
+[node name="Timer2" type="Timer" parent="VBoxContainer/HBoxContainer/Shuriken/Label"]
 wait_time = 0.1
 
-[connection signal="pressed" from="Shuriken" to="Shuriken" method="_on_pressed"]
-[connection signal="timeout" from="Shuriken/Label/Timer" to="Shuriken" method="_on_timer_timeout"]
-[connection signal="timeout" from="Shuriken/Label/Timer2" to="Shuriken" method="_on_timer_2_timeout"]
+[node name="SmokeBomb" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+action_mode = 0
+shortcut = SubResource("Shortcut_vy1b1")
+icon = ExtResource("1_r1pfj")
+flat = true
+script = ExtResource("2_rgn3x")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/SmokeBomb"]
+visible = false
+layout_mode = 2
+offset_right = 211.0
+offset_bottom = 182.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_7j4te")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i1rmh")
+max_value = 2.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/SmokeBomb"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 209.0
+offset_bottom = 179.0
+
+[node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Timer2" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
+wait_time = 0.1
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Shuriken" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_pressed"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/Shuriken/Label/Timer" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_timer_timeout"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/Shuriken/Label/Timer2" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_timer_2_timeout"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/SmokeBomb" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_pressed"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_timeout"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer2" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_2_timeout"]

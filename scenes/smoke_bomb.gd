@@ -2,7 +2,7 @@ extends Button
 
 var cooldown = false
 
-func throwthing():
+func kaboom():
 	if cooldown == false:
 		$Label/Timer.start()
 		cooldown = true
@@ -14,18 +14,17 @@ func throwthing():
 		$ProgressBar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$ProgressBar.max_value = time_left
 	else:
-		print("Shuriken is on cooldown")
+		print("Smoke Bomb is on cooldown")
 
-		
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("shuriken"):
-		throwthing()
-	
+	if Input.is_action_just_pressed("smokebomb"):
+		kaboom()
+		
 func _on_pressed():
-	throwthing()
+	kaboom()
 
 func _on_timer_timeout():
-	print("Shuriken can now be used")
+	print("Smoke Bomb can now be used")
 	$Label.visible = false
 	cooldown = false
 	$ProgressBar.visible = false
