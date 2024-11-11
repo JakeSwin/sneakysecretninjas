@@ -4,9 +4,9 @@ var cooldown = false
 
 func kaboom():
 	if cooldown == false:
-		$Label/Timer.start()
+		$Label/Timer.start() # Cooldown timer
 		cooldown = true
-		$Label/Timer2.start()
+		$Label/Timer2.start() # Timer that updates the visible timer
 		var time_left = (snapped($Label/Timer.time_left, 0.1))
 		$Label.text = str(time_left)
 		$Label.visible = true
