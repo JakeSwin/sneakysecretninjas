@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmenrca0lrq0h"]
 
 [ext_resource type="Texture2D" uid="uid://csrogux7aaghw" path="res://assets/Untitled.png" id="1_aulhd"]
-[ext_resource type="Script" path="res://scenes/button.gd" id="2_ovcuw"]
-[ext_resource type="Script" path="res://scenes/button_2.gd" id="3_wxhaf"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="2_ovcuw"]
+[ext_resource type="Script" path="res://scripts/button_2.gd" id="3_wxhaf"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

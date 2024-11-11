@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Texture2D" uid="uid://i4wogwnjpmsj" path="res://assets/Untitled2.png" id="1_r1pfj"]
-[ext_resource type="Script" path="res://scenes/shuriken.gd" id="2_o8vlt"]
-[ext_resource type="Script" path="res://scenes/smoke_bomb.gd" id="2_rgn3x"]
+[ext_resource type="Script" path="res://scripts/shuriken.gd" id="2_o8vlt"]
+[ext_resource type="Script" path="res://scripts/smoke_bomb.gd" id="2_rgn3x"]
 
 [sub_resource type="Shortcut" id="Shortcut_vy1b1"]
 
@@ -13,6 +13,7 @@ bg_color = Color(0.21, 0.21, 0.21, 0.462745)
 
 [node name="Control" type="Control"]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
