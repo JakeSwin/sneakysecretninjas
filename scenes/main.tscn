@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/light_circle_move.gd" id="1_mvp0l"]
 [ext_resource type="PackedScene" uid="uid://mhhybwws8xbt" path="res://scenes/bush.tscn" id="1_omau3"]
-[ext_resource type="PackedScene" uid="uid://c3g6b701m1wf" path="res://scenes/ninja.tscn" id="5_fpwo7"]
+[ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_hvnev"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x2ljx"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
@@ -81,9 +81,10 @@ input_ray_pickable = false
 transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 1.74846e-07, 1.74846e-07, -4)
 shape = SubResource("CapsuleShape3D_ou476")
 
-[node name="Ninja" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_fpwo7")]
+[node name="ninjav2" parent="." node_paths=PackedStringArray("target_node", "camera_node") instance=ExtResource("3_hvnev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 target_node = NodePath("../Tile/Bushes/Bush")
+camera_node = NodePath("../Camera3D")
 
 [connection signal="body_entered" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_exited"]

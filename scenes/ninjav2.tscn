@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://uptq2n8o2dcl"]
+
+[ext_resource type="PackedScene" uid="uid://b3i8hgs8qrqiw" path="res://assets/NinjaV2.gltf" id="1_u5v6a"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_prhj3"]
+[ext_resource type="AudioStream" uid="uid://b038aggsr815k" path="res://assets/sounds/alert.mp3" id="3_uej5e"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywewd"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4bkm5"]
+emission_shape_offset = Vector3(0, -1, 0.5)
+emission_shape_scale = Vector3(0.5, 0.5, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+scale_min = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu08a"]
+transparency = 1
+albedo_color = Color(0.4, 0.552941, 0.792157, 0.486275)
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_fn8tl"]
+material = SubResource("StandardMaterial3D_fu08a")
+size = 0.05
+section_length = 0.3
+
+[node name="ninjav2" instance=ExtResource("1_u5v6a")]
+script = ExtResource("2_prhj3")
+
+[node name="body" parent="Node/ninja" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, -4.84621e-18, 0.289773, -1.54198e-18)
+
+[node name="leftarm" parent="Node/ninja/body" index="3"]
+transform = Transform3D(0.92388, 0.346829, -0.161729, -0.382683, 0.837319, -0.390448, 0, 0.422618, 0.906308, -0.264323, 0.405193, 1.54198e-19)
+
+[node name="forearm2" parent="Node/ninja/body/leftarm" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.461749, -0.887011, 0, 0.887011, 0.461749, -0.00651042, -0.305035, -1.38778e-18)
+
+[node name="hand2" parent="Node/ninja/body/leftarm/forearm2" index="1"]
+transform = Transform3D(0.737277, 0, -0.67559, 0, 1, 0, 0.67559, 0, 0.737277, 0, -0.203819, -2.77556e-18)
+
+[node name="rightarm" parent="Node/ninja/body" index="4"]
+transform = Transform3D(0.976296, -0.171713, 0.13176, 0.21644, 0.774548, -0.594331, -1.49012e-08, 0.608761, 0.793353, 0.264323, 0.405193, 1.54198e-19)
+
+[node name="forearm22" parent="Node/ninja/body/rightarm" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.422618, -0.906308, 0, 0.906308, 0.422618, 0.00651042, -0.305035, -1.38778e-18)
+
+[node name="hand22" parent="Node/ninja/body/rightarm/forearm22" index="1"]
+transform = Transform3D(0.498097, -0.0435779, 0.866026, 0.0871557, 0.996195, 3.72529e-09, -0.86273, 0.0754791, 0.5, 0, -0.203819, -2.77556e-18)
+
+[node name="head" parent="Node/ninja/body" index="5"]
+transform = Transform3D(1, 0, 0, 0, 0.991445, -0.130526, 0, 0.130526, 0.991445, -0.000613808, 0.520612, 0.00369981)
+
+[node name="rightleg" parent="Node/ninja" index="1"]
+transform = Transform3D(0.965926, -0.25, 0.0669873, 0.258819, 0.933013, -0.25, -7.45058e-09, 0.258819, 0.965926, 0.100632, 0.241319, -0.0161111)
+
+[node name="shin2" parent="Node/ninja/rightleg" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.0871557, 0.996195, 0, -0.996195, 0.0871557, 0.00353423, -0.404514, 0.00472222)
+
+[node name="foot2" parent="Node/ninja/rightleg/shin2" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.85037e-17, -0.298611, 0.00944444)
+
+[node name="leftleg" parent="Node/ninja" index="2"]
+transform = Transform3D(0.996195, 0.0871558, 0, -0.0262082, 0.299561, -0.953717, -0.0831219, 0.950088, 0.300706, -0.100632, 0.199653, -0.0161111)
+
+[node name="shin22" parent="Node/ninja/leftleg" index="2"]
+transform = Transform3D(1, 0, 0, 0, 0.21644, 0.976296, 0, -0.976296, 0.21644, -0.00353423, -0.404514, 0.00472222)
+
+[node name="foot22" parent="Node/ninja/leftleg/shin22" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 1.85037e-17, -0.298611, 0.00944444)
+
+[node name="NinjaCollider" type="StaticBody3D" parent="." index="2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NinjaCollider" index="0"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_ywewd")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("3_uej5e")
+volume_db = 5.0
+
+[node name="DashSphere" type="CSGSphere3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+
+[node name="DashParticles" type="GPUParticles3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+emitting = false
+amount = 10
+lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_4bkm5")
+draw_pass_1 = SubResource("RibbonTrailMesh_fn8tl")
