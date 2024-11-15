@@ -34,11 +34,12 @@ func set_move_target(object: Node3D):
 func change_visiblity(amount: int):
 	visibility += amount
 
-func check_if_caught():
-	if visibility > 0:
-		moving = false
-		caught = true
-		alert_sound.play()
+func check_if_caught():	
+	if Global.smoked == false:
+		if visibility > 0:
+			moving = false
+			caught = true
+			alert_sound.play()
 
 func move():
 	position = position.lerp(target_node.global_position + Vector3(0, 0, 0.8), lerp_weight)
