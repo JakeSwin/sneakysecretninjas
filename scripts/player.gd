@@ -51,3 +51,4 @@ func check_target_reached():
 		moving = false
 		$AnimationPlayer.play("Hiding")
 		rotation = Vector3.ZERO
+		Global.smoked = false
