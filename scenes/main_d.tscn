@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8xex23fcqoug"]
+
+[ext_resource type="Script" path="res://scripts/ground_spawner.gd" id="1_xl2vg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3n0by"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1vcbg"]
+seamless = true
+noise = SubResource("FastNoiseLite_3n0by")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l86iv"]
+sky_cover = SubResource("NoiseTexture2D_1vcbg")
+
+[sub_resource type="Sky" id="Sky_81yc6"]
+sky_material = SubResource("ProceduralSkyMaterial_l86iv")
+
+[sub_resource type="Environment" id="Environment_rn11d"]
+background_mode = 2
+sky = SubResource("Sky_81yc6")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rn11d")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, 0)
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.322266, 0.946649, 0, -0.946649, 0.322266, 0, 100, 8)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="GroundSpawner" type="Node3D" parent="."]
+script = ExtResource("1_xl2vg")
+
+[node name="Timer" type="Timer" parent="GroundSpawner"]
+
+[node name="Ninja start" type="Node3D" parent="."]
