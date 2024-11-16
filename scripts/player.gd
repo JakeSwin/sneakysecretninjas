@@ -39,7 +39,7 @@ func change_visiblity(amount: int):
 	visibility += amount
 
 func check_if_caught():
-	if visibility > 0:
+	if visibility > 0 and Global.smoked == false:
 		moving = false
 		caught = true
 		dash_particles.emitting = false
@@ -58,3 +58,4 @@ func check_target_reached():
 		$AnimationPlayer.play("hide") # Hiding
 		dash_particles.emitting = false
 		rotation = Vector3.ZERO
+		Global.smoked = false
