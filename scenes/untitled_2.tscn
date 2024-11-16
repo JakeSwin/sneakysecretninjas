@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctrfdlhf1iybr"]
-
-[ext_resource type="Texture2D" uid="uid://i4wogwnjpmsj" path="res://assets/Untitled2.png" id="1_drdyx"]
-
-[node name="Untitled2" type="Sprite2D"]
-position = Vector2(350, 95)
-texture = ExtResource("1_drdyx")

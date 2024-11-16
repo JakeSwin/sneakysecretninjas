@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7sn86ho1rusg"]
+[gd_scene load_steps=10 format=3 uid="uid://c7sn86ho1rusg"]
 
 [ext_resource type="Script" path="res://scripts/light_circle_move.gd" id="1_mvp0l"]
 [ext_resource type="PackedScene" uid="uid://mhhybwws8xbt" path="res://scenes/bush.tscn" id="1_omau3"]
 [ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_hvnev"]
+[ext_resource type="PackedScene" uid="uid://hflp43gvv8km" path="res://scenes/in_game.tscn" id="4_w2c1b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x2ljx"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
@@ -85,6 +86,8 @@ shape = SubResource("CapsuleShape3D_ou476")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 target_node = NodePath("../Tile/Bushes/Bush")
 camera_node = NodePath("../Camera3D")
+
+[node name="Control" parent="." instance=ExtResource("4_w2c1b")]
 
 [connection signal="body_entered" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_exited"]
