@@ -38,5 +38,5 @@ func _on_timer_2_timeout(): #This controls the text label which displays the coo
 	
  
 
-#func _on_timer_3_timeout(): #This controls the duration of the smoke bomb
-	#Global.smoked = false
+func _on_timer_3_timeout(): #This controls the duration of the smoke bomb
+	Global.smoked = false

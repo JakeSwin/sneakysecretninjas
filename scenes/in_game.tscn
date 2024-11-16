@@ -105,6 +105,7 @@ one_shot = true
 wait_time = 0.1
 
 [node name="Timer3" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
+wait_time = 2.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Shuriken" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_pressed"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/Shuriken/Label/Timer" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_timer_timeout"]
