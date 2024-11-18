@@ -1,8 +1,15 @@
 extends Button
 
 var cooldown = false
+var particle: PackedScene
+var particles_instance: Node
 
-
+func _ready() -> void:
+	particle = load("res://scenes/smoke_effect.tscn")
+	particles_instance = particle.instantiate()
+	add_child(particles_instance)
+	particles_instance.emitting = false	
+	
 func kaboom():
 	if cooldown == false:
 		$Label/Timer.start() # Cooldown timer
@@ -16,6 +23,9 @@ func kaboom():
 		$ProgressBar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$ProgressBar.max_value = time_left
 		Global.smoked = true
+		particles_instance.emitting = true
+		await get_tree().create_timer(3.0).timeout
+		particles_instance.emitting = false
 	else:
 		print("Smoke Bomb is on cooldown")
 
@@ -36,7 +46,6 @@ func _on_timer_2_timeout(): #This controls the text label which displays the coo
 	$Label.text = str(snapped($Label/Timer.time_left, 0.1))
 	$ProgressBar.value = (snapped($Label/Timer.time_left, 0.1))
 	
- 
 
 func _on_timer_3_timeout(): #This controls the duration of the smoke bomb
 	Global.smoked = false
