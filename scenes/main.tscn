@@ -85,7 +85,8 @@ shape = SubResource("CapsuleShape3D_ou476")
 
 [node name="ninjav2" parent="." groups=["ninja"] instance=ExtResource("3_hvnev")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-script = null
+target_node = NodePath("../Tile/Bushes/Bush")
+camera_node = NodePath("../Camera3D")
 
 [node name="GPUParticles3D" parent="ninjav2" instance=ExtResource("4_0b1pv")]
 
