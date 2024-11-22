@@ -3,12 +3,15 @@ extends Button
 var cooldown = false
 var particle: PackedScene
 var particles_instance: Node
+var ninja: Node
 
 func _ready() -> void:
 	particle = load("res://scenes/smoke_effect.tscn")
 	particles_instance = particle.instantiate()
 	add_child(particles_instance)
-	particles_instance.emitting = false	
+	particles_instance.emitting = false
+	ninja = get_tree().get_nodes_in_group("ninja")[0]
+	
 	
 func kaboom():
 	if cooldown == false:
@@ -23,6 +26,7 @@ func kaboom():
 		$ProgressBar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$ProgressBar.max_value = time_left
 		Global.smoked = true
+		particles_instance.global_position = ninja.global_position
 		particles_instance.emitting = true
 		await get_tree().create_timer(3.0).timeout
 		particles_instance.emitting = false
