@@ -60,9 +60,7 @@ func check_if_caught():
 		dash_particles.emitting = false
 		alert_sound.play()
 		$AnimationPlayer.play("caught")
-		#$Label/Timer.stop()
-		await get_tree().create_timer(2.0).timeout
-		print("L bozo")
+		SignalBus.emit_signal("caught", self)
 		return
 
 func move():

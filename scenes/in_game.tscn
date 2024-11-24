@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://hflp43gvv8km"]
+[gd_scene load_steps=10 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Texture2D" uid="uid://c0aagyjmkdg7y" path="res://assets/throwing-star-153835_640.png" id="1_g3ouc"]
 [ext_resource type="Script" path="res://scripts/shuriken.gd" id="2_o8vlt"]
 [ext_resource type="Script" path="res://scripts/smoke_bomb.gd" id="2_rgn3x"]
 [ext_resource type="Texture2D" uid="uid://l8gue77fnqyp" path="res://assets/6319455.png" id="3_k8ddx"]
 [ext_resource type="Script" path="res://scripts/label.gd" id="5_8h54k"]
+[ext_resource type="Script" path="res://scripts/SaveData.gd" id="6_85csr"]
 
 [sub_resource type="Shortcut" id="Shortcut_vy1b1"]
 
@@ -117,6 +118,9 @@ offset_bottom = 61.0
 script = ExtResource("5_8h54k")
 
 [node name="Timer" type="Timer" parent="Label"]
+
+[node name="SaverLoader" type="Node" parent="."]
+script = ExtResource("6_85csr")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Shuriken" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_pressed"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/Shuriken/Label/Timer" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_timer_timeout"]
