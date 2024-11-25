@@ -27,7 +27,7 @@ var season_streak = 0
 
 #tile
 var forest_tile = preload("res://scenes/forest_tile.tscn")
-@export var speed: float = 50
+@export var speed: float = 5
 var spawn_interval: float = 1
 var time_since_last_spawn: float = 0.0
 var tile_width = 16 
@@ -168,7 +168,7 @@ func spawn_tile():
 	#await delay(0.001)
 	spawn_decorations(next_tile, flowers, decoration_3, 0.25, -0.3, 0.3)
 	#await delay(0.001)
-	place_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season)
+	spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season)
 	#wait delay(0.001)
 	check_new_seed()
 
@@ -210,7 +210,8 @@ func cover_grid(tile):
 			if noise_value > 0.4 and can_place_cover(x, z): #Increase/decrease the float to decrease/increase the amount of cover
 				spawn_cover(tile, Vector3(x, 0, z))
 				has_cover = true
-				
+			if noise_value > 0.45:
+				spawn_spotlight(tile, Vector3(x, 0, z))
 		#if initial == false:
 			#await get_tree().create_timer(0.001).timeout
 			
@@ -343,7 +344,7 @@ func spawn_decorations(tile, decoration_scene: Array, noise_map, cell_size, nois
 				
 				tile.add_child(new_decoration)
 
-func place_trees(tile, tree_scene, noise_map, cell_size, noise_threshold, extra_width, new_season: String):
+func spawn_trees(tile, tree_scene, noise_map, cell_size, noise_threshold, extra_width, new_season: String):
 	var total_width = tile_width + 2 * extra_width
 	var lane_half_width = tile_width / 4
 	var lane_buffer = lane_half_width + 1.5 * cell_size #Doesn't place trees within N cell spaces each side next to the lane

@@ -69,4 +69,4 @@ libraries = {
 }
 
 [node name="Bush" parent="." instance=ExtResource("2_c155l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
