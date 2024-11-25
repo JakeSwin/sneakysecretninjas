@@ -15,14 +15,13 @@ gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_min = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu08a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrsox"]
 transparency = 1
-albedo_color = Color(0.4, 0.552941, 0.792157, 0.486275)
+albedo_color = Color(0.490719, 0.549691, 0.640099, 0.666667)
 
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_fn8tl"]
-material = SubResource("StandardMaterial3D_fu08a")
-size = 0.05
-section_length = 0.3
+[sub_resource type="BoxMesh" id="BoxMesh_m8yfn"]
+material = SubResource("StandardMaterial3D_lrsox")
+size = Vector3(0.05, 1, 0.05)
 
 [node name="ninjav2" instance=ExtResource("1_u5v6a")]
 script = ExtResource("2_prhj3")
@@ -89,4 +88,4 @@ emitting = false
 amount = 10
 lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_4bkm5")
-draw_pass_1 = SubResource("RibbonTrailMesh_fn8tl")
+draw_pass_1 = SubResource("BoxMesh_m8yfn")

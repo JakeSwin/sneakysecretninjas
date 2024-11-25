@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4ieqh5kx13a2"]
+
+[ext_resource type="PackedScene" uid="uid://baklagwuomlx" path="res://assets/Guard.gltf" id="1_0f5rj"]
+[ext_resource type="PackedScene" uid="uid://inh1k3tn3868" path="res://scenes/spotlight.tscn" id="2_eims0"]
+[ext_resource type="Script" path="res://guard.gd" id="2_flj80"]
+
+[node name="guard" instance=ExtResource("1_0f5rj")]
+script = ExtResource("2_flj80")
+
+[node name="rightleg" parent="Node/waist" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0833333, -0.10272, -0.0260417)
+
+[node name="foot" parent="Node/waist/rightleg/shin" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.277778, 0.0520833)
+
+[node name="leftleg" parent="Node/waist" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0833333, -0.10272, -0.0260417)
+
+[node name="rightarm" parent="Node/waist/chest" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.923879, -0.382683, 0, 0.382683, 0.923879, 0.1875, 0.28723, -0.000940802)
+
+[node name="forearm" parent="Node/waist/chest/rightarm" index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.642788, -0.766044, 0, 0.766044, 0.642788, 0.0833333, -0.277681, 0.0411963)
+
+[node name="hand" parent="Node/waist/chest/rightarm/forearm" index="1"]
+transform = Transform3D(-0.0256913, -0.0558572, -0.998108, 0.937498, 0.345267, -0.0434534, 0.347041, -0.936841, 0.0434957, 0, -0.25434, -0.0430779)
+
+[node name="SpotLight3D" parent="Node/waist/chest/rightarm/forearm/hand/torch" index="0" instance=ExtResource("2_eims0")]
+transform = Transform3D(0.998108, 0.0545493, 0.0283629, 0.0256913, 0.049068, -0.998466, -0.0558572, 0.997305, 0.0475737, 0.00770476, 0.362768, -0.0105891)
+light_energy = 10.0
+spot_range = 8.30282
+spot_angle = 26.351
+
+[node name="leftarm" parent="Node/waist/chest" index="2"]
+transform = Transform3D(0.976296, 0.0740266, -0.203387, 0.0560187, 0.82125, 0.567811, 0.209065, -0.565745, 0.797636, -0.1875, 0.28723, -0.000940802)
+
+[node name="forearm2" parent="Node/waist/chest/leftarm" index="1"]
+transform = Transform3D(0.976296, -0.21644, -1.49012e-08, 0.0650846, 0.293578, -0.953717, 0.206422, 0.93111, 0.300706, -0.0833333, -0.277681, 0.0411963)
+
+[node name="hand2" parent="Node/waist/chest/leftarm/forearm2" index="1"]
+transform = Transform3D(0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 0, -0.25434, -0.0430779)
