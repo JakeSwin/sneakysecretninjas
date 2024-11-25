@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvme2syglheb7"]
+
+[ext_resource type="PackedScene" uid="uid://0vxkl4i4or0q" path="res://synty/SM_Plant_Flowers_01.fbx" id="1_rw4bd"]
+[ext_resource type="Texture2D" uid="uid://c1q50sy0fpxcd" path="res://Synty_assets/Synty_assets_textures/PolygonNature_04.png" id="2_84fve"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umpjn"]
+albedo_texture = ExtResource("2_84fve")
+
+[node name="SM_Plant_Flowers_01" instance=ExtResource("1_rw4bd")]
+
+[node name="SM_Plant_Flowers_01" parent="." index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_umpjn")

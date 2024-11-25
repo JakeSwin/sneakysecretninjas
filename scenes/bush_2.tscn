@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqqa7qbaugup"]
+
+[ext_resource type="PackedScene" uid="uid://dooenqg65soxn" path="res://synty/SM_Plant_Hedge_Bush_02.fbx" id="1_u60k8"]
+[ext_resource type="Texture2D" uid="uid://dnctr3ix301k5" path="res://Synty_assets/Synty_assets_textures/PolygonNature_02.png" id="2_t03pn"]
+[ext_resource type="PackedScene" uid="uid://mhhybwws8xbt" path="res://scenes/bush.tscn" id="3_d2h8l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dl2c"]
+albedo_texture = ExtResource("2_t03pn")
+
+[node name="SM_Plant_Hedge_Bush_02" instance=ExtResource("1_u60k8")]
+
+[node name="SM_Plant_Hedge_Bush_02" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_0dl2c")
+
+[node name="Bush" parent="." index="2" instance=ExtResource("3_d2h8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp3nvmesr3wfu"]
+
+[ext_resource type="Script" path="res://scripts/light_circle_move.gd" id="1_n0q4p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_to8tb"]
+
+[node name="SpotLight3D" type="SpotLight3D"]
+transform = Transform3D(1, -1.91069e-15, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 16.3941)
+light_color = Color(0.96251, 0.961126, 0, 1)
+light_energy = 20.0
+shadow_blur = 10.0
+script = ExtResource("1_n0q4p")
+
+[node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 1.74846e-07, 1.74846e-07, -4)
+shape = SubResource("CapsuleShape3D_to8tb")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
