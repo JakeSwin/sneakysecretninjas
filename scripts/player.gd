@@ -45,6 +45,7 @@ func check_if_caught():
 		dash_particles.emitting = false
 		alert_sound.play()
 		$AnimationPlayer.play("caught")
+		SignalBus.emit_signal("caught", self)
 		return
 
 func move():

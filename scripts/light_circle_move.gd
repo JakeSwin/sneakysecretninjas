@@ -1,4 +1,4 @@
-extends SpotLight3D
+extends Node3D
 
 var radius = 3  # Circle radius
 var angle = 0.0   # Current angle
@@ -15,11 +15,3 @@ func _process(delta: float) -> void:
 	
 	# Update position
 	position = Vector3(x_pos, 4, y_pos)
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body.name == "NinjaCollider":
-		SignalBus.emit_signal("seen_by", 1)
-
-func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body.name == "NinjaCollider":
-		SignalBus.emit_signal("seen_by", -1)
