@@ -5,7 +5,7 @@ var oldscore
 var newscore
 
 func _ready():
-	Global.leaderboard = [00.00,00.00,00.00,00.00,00.00,00.00,00.00,00.00,00.00,00.00]
+	Global.leaderboard = ["00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00"]
 	load_score()
 
 func save_score():
@@ -14,7 +14,7 @@ func save_score():
 	Global.leaderboard.append(label.text)
 	Global.leaderboard.sort()
 	Global.leaderboard.reverse()
-	
+
 	#saved_data["LatestScore"] = Global.leaderboard[-1]
 	saved_data["TopScore"] = Global.leaderboard[0]
 	saved_data["Second"] = Global.leaderboard[1]
@@ -26,7 +26,7 @@ func save_score():
 	saved_data["Eighth"] = Global.leaderboard[7]
 	saved_data["Ninth"] = Global.leaderboard[8]
 	saved_data["Tenth"] = Global.leaderboard[9]
-	
+
 	var json = JSON.stringify(saved_data)
 	file.store_string(json)
 	file.close()
