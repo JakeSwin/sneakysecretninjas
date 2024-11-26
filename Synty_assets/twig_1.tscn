@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://rad7e0tyaqwa"]
+
+[ext_resource type="PackedScene" uid="uid://c7o2ywgf4r48e" path="res://synty/SM_Tree_Twig_01.fbx" id="1_omfb3"]
+[ext_resource type="Texture2D" uid="uid://ucs8toeuku15" path="res://Synty_assets/Synty_assets_textures/PolygonNature_01.png" id="2_8fxo8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dsxmo"]
+albedo_texture = ExtResource("2_8fxo8")
+
+[node name="SM_Tree_Twig_01" instance=ExtResource("1_omfb3")]
+
+[node name="SM_Tree_Twig_01" parent="." index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.0347594, 0.000541216, -0.172804)
+material_override = SubResource("StandardMaterial3D_dsxmo")

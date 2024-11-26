@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://btxphv2sjhu50"]
+
+[ext_resource type="PackedScene" uid="uid://c6bssmh7qbqo4" path="res://synty/SM_Terrain_Rubble_Pebbles_03.fbx" id="1_6gqjl"]
+[ext_resource type="Texture2D" uid="uid://ucs8toeuku15" path="res://Synty_assets/Synty_assets_textures/PolygonNature_01.png" id="2_11dt8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8ulc"]
+albedo_texture = ExtResource("2_11dt8")
+
+[node name="SM_Terrain_Rubble_Pebbles_03" instance=ExtResource("1_6gqjl")]
+
+[node name="SM_Terrain_Rubble_Pebbles_03" parent="." index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_s8ulc")

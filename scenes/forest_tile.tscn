@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://6svc0ce2xs8o"]
+
+[ext_resource type="Texture2D" uid="uid://cyk83v3sr7lmd" path="res://synty/Ground_Textures/Grass_02.png" id="1_w3jdu"]
+[ext_resource type="Script" path="res://scripts/ground.gd" id="2_18kl8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgguq"]
+albedo_texture = ExtResource("1_w3jdu")
+uv1_scale = Vector3(20, 8, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h5h1k"]
+size = Vector3(500, 0.5, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d645k"]
+albedo_color = Color(0, 0.384314, 0.129412, 1)
+uv1_scale = Vector3(1.255, 1.255, 1.255)
+uv2_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w1itx"]
+size = Vector3(2, 1, 2)
+
+[node name="Ground" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000190735, -1.90735e-06, -5.12327)
+material_override = SubResource("StandardMaterial3D_jgguq")
+mesh = SubResource("BoxMesh_h5h1k")
+surface_material_override/0 = SubResource("StandardMaterial3D_d645k")
+script = ExtResource("2_18kl8")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_w1itx")

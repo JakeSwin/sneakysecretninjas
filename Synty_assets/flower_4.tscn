@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjfs554qohovp"]
+
+[ext_resource type="PackedScene" uid="uid://b2l046v44ppa6" path="res://synty/SM_Plant_Fern_02.fbx" id="1_gaxvt"]
+[ext_resource type="Texture2D" uid="uid://ucs8toeuku15" path="res://Synty_assets/Synty_assets_textures/PolygonNature_01.png" id="2_48p6o"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajpc1"]
+albedo_texture = ExtResource("2_48p6o")
+
+[node name="SM_Plant_Fern_02" instance=ExtResource("1_gaxvt")]
+
+[node name="SM_Plant_Fern_02" parent="." index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ajpc1")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ground_spawner.gd" id="1_xl2vg"]
 [ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="2_04yp1"]
-[ext_resource type="PackedScene" uid="uid://inh1k3tn3868" path="res://scenes/spotlight.tscn" id="2_ns3t7"]
+[ext_resource type="PackedScene" uid="uid://dp3nvmesr3wfu" path="res://scenes/spot_light_3d.tscn" id="2_8r4ja"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cq3bw"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
@@ -34,7 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 0.743144, 0.66913, 0, -0.66913, 0.743144, 0,
 
 [node name="GroundSpawner" type="Node3D" parent="."]
 script = ExtResource("1_xl2vg")
-spotlight_scene = ExtResource("2_ns3t7")
+spotlight_scene = ExtResource("2_8r4ja")
 
 [node name="Ninja start" type="Node3D" parent="."]
 

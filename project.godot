@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="SneakySecretNinjas"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/main_d.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 
 [autoload]
 
 SignalBus="*res://scripts/signal_bus.gd"
 Global="*res://scripts/global.gd"
+
+[display]
+
+window/size/always_on_top=true
 
 [dotnet]
 

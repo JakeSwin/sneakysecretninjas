@@ -1,0 +1,10 @@
+[gd_resource type="RibbonTrailMesh" load_steps=2 format=3 uid="uid://dpjv8820hfg2f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fu08a"]
+transparency = 1
+albedo_color = Color(0.4, 0.552941, 0.792157, 0.486275)
+
+[resource]
+material = SubResource("StandardMaterial3D_fu08a")
+size = 0.05
+section_length = 0.3
