@@ -18,25 +18,27 @@ radius = 1.25265
 radius = 1.15559
 
 [node name="SpotLight3D" type="SpotLight3D"]
-transform = Transform3D(1, -1.91069e-15, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
+transform = Transform3D(1, -1.91069e-15, -8.35187e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 0, 4, 0)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 shadow_blur = 10.0
+spot_range = 5.81319
+spot_angle = 44.6794
 
 [node name="Area3D" type="Area3D" parent="."]
 input_ray_pickable = false
 script = ExtResource("2_s2etr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(5, 0, -2.25857e-22, 3.38813e-21, -2.18557e-07, -5, 1.11075e-28, 5, -2.18557e-07, 1.61541e-07, 1.61541e-07, -3.69562)
+transform = Transform3D(5, 3.70249e-29, -1.61841e-36, 0, -2.18557e-07, -5, -3.70249e-29, 5, -2.18557e-07, 1.61541e-07, 1.61541e-07, -3.69562)
 shape = SubResource("CylinderShape3D_e8ylk")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, -4.23658e-23, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.02662e-07, 1.02662e-07, -2.34864)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.02662e-07, 1.02662e-07, -2.34864)
 shape = SubResource("CylinderShape3D_4iy2m")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, -4.23658e-23, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.42296e-08, 6.42296e-08, -1.4694)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 6.42296e-08, 6.42296e-08, -1.4694)
 shape = SubResource("CylinderShape3D_awjst")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Area3D"]

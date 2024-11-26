@@ -8,7 +8,7 @@ albedo_texture = ExtResource("1_w3jdu")
 uv1_scale = Vector3(20, 8, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_h5h1k"]
-size = Vector3(500, 0.5, 50)
+size = Vector3(500, 0.5, 25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d645k"]
 albedo_color = Color(0, 0.384314, 0.129412, 1)
