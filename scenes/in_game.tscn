@@ -151,17 +151,20 @@ alignment = 1
 script = ExtResource("7_wm74y")
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 text = "You were caught!"
 label_settings = SubResource("LabelSettings_b1x8o")
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_fxngj")
 text = "Retry"
 script = ExtResource("9_dofrt")
 
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("7_fxngj")
 text = "Return to menu"

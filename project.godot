@@ -27,6 +27,10 @@ window/size/always_on_top=true
 
 project/assembly_name="SneakySecretNinjas"
 
+[global_group]
+
+ninja=""
+
 [input]
 
 smokebomb={
