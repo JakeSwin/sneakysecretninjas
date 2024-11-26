@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7sn86ho1rusg"]
+[gd_scene load_steps=11 format=3 uid="uid://dahu704dt2278"]
 
-[ext_resource type="Script" path="res://scripts/light_circle_move.gd" id="1_mvp0l"]
-[ext_resource type="PackedScene" uid="uid://mhhybwws8xbt" path="res://scenes/bush.tscn" id="1_omau3"]
-[ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_hvnev"]
-[ext_resource type="PackedScene" uid="uid://ck8tl13xwn1cb" path="res://scenes/smoke_effect.tscn" id="4_0b1pv"]
-[ext_resource type="PackedScene" uid="uid://hflp43gvv8km" path="res://scenes/in_game.tscn" id="4_w2c1b"]
-[ext_resource type="PackedScene" uid="uid://dl8m7cuio8sv0" path="res://scenes/leaderboard.tscn" id="6_tv72y"]
+[ext_resource type="PackedScene" uid="uid://bfhryf8p1ufhj" path="res://scenes/bush_1.tscn" id="1_y5tbt"]
+[ext_resource type="Script" path="res://scripts/light_circle_move.gd" id="2_ytn0r"]
+[ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_jp8jp"]
+[ext_resource type="PackedScene" uid="uid://c16x6y38q2woj" path="res://scenes/menu.tscn" id="4_m28ih"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x2ljx"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
@@ -34,13 +32,18 @@ metallic_specular = 0.15
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ou476"]
 
+[sub_resource type="GDScript" id="GDScript_3d3iw"]
+script/source = "extends Control
+
+"
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dgrgj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 7, 5.5)
+transform = Transform3D(-0.0540788, -0.187107, 0.98085, -8.58743e-08, 0.982287, 0.187381, -0.998537, 0.0101333, -0.053121, 16.5143, 3.01869, 1.2782)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.433013, -0.5, -0.75, -0.866025, 2.18557e-08, 0.5, -0.25, 0.866025, -0.433013, 0, 2, 0)
@@ -52,30 +55,24 @@ shadow_blur = 5.0
 [node name="Tile" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Tile"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-size = Vector3(10, 0.5, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9433, -0.25, 0)
+size = Vector3(23.8866, 0.5, 10)
 material = SubResource("StandardMaterial3D_hppfr")
 
 [node name="Bushes" type="Node3D" parent="Tile"]
 
-[node name="Bush" parent="Tile/Bushes" instance=ExtResource("1_omau3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+[node name="SM_Plant_Hedge_Bush_01" parent="Tile/Bushes" instance=ExtResource("1_y5tbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96415, 0, -3.84383)
 
-[node name="Bush2" parent="Tile/Bushes" instance=ExtResource("1_omau3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 2)
-
-[node name="Bush3" parent="Tile/Bushes" instance=ExtResource("1_omau3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
-
-[node name="Bush4" parent="Tile/Bushes" instance=ExtResource("1_omau3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -3)
+[node name="SM_Plant_Hedge_Bush_02" parent="Tile/Bushes" instance=ExtResource("1_y5tbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30619, 0, 3.06091)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, -1.91069e-15, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4, 0)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 shadow_blur = 10.0
-script = ExtResource("1_mvp0l")
+script = ExtResource("2_ytn0r")
 
 [node name="Area3D" type="Area3D" parent="SpotLight3D"]
 input_ray_pickable = false
@@ -84,16 +81,12 @@ input_ray_pickable = false
 transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 1.74846e-07, 1.74846e-07, -4)
 shape = SubResource("CapsuleShape3D_ou476")
 
-[node name="ninjav2" parent="." node_paths=PackedStringArray("target_node", "camera_node") instance=ExtResource("3_hvnev")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
-target_node = NodePath("../Tile/Bushes/Bush")
-camera_node = NodePath("../Camera3D")
+[node name="ninjav2" parent="." instance=ExtResource("3_jp8jp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.99855, -0.049582, 1.46214)
+script = null
 
-[node name="GPUParticles3D" parent="ninjav2" instance=ExtResource("4_0b1pv")]
-
-[node name="Control" parent="." instance=ExtResource("4_w2c1b")]
-
-[node name="Leaderboard" parent="." instance=ExtResource("6_tv72y")]
+[node name="Control" parent="." instance=ExtResource("4_m28ih")]
+script = SubResource("GDScript_3d3iw")
 
 [connection signal="body_entered" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="SpotLight3D/Area3D" to="SpotLight3D" method="_on_area_3d_body_exited"]

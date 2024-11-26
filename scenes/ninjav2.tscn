@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://uptq2n8o2dcl"]
+[gd_scene load_steps=11 format=3 uid="uid://uptq2n8o2dcl"]
 
 [ext_resource type="PackedScene" uid="uid://b3i8hgs8qrqiw" path="res://assets/NinjaV2.gltf" id="1_u5v6a"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_prhj3"]
@@ -23,14 +23,25 @@ albedo_color = Color(0.490719, 0.549691, 0.640099, 0.666667)
 material = SubResource("StandardMaterial3D_lrsox")
 size = Vector3(0.05, 1, 0.05)
 
-[node name="ninjav2" instance=ExtResource("1_u5v6a")]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o4y8r"]
+gravity = Vector3(0, 10, 0)
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbhgw"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gbuyr"]
+material = SubResource("StandardMaterial3D_qbhgw")
+radius = 0.05
+height = 0.05
+
+[node name="ninjav2" groups=["ninja"] instance=ExtResource("1_u5v6a")]
 script = ExtResource("2_prhj3")
 
 [node name="body" parent="Node/ninja" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.976296, 0.21644, 0, -0.21644, 0.976296, -4.84621e-18, 0.289773, -1.54198e-18)
 
 [node name="leftarm" parent="Node/ninja/body" index="3"]
-transform = Transform3D(0.92388, 0.346829, -0.161729, -0.382683, 0.837319, -0.390448, 0, 0.422618, 0.906308, -0.264323, 0.405193, 1.54198e-19)
+transform = Transform3D(0.92388, 0.346829, -0.161729, -0.382684, 0.837319, -0.390448, 0, 0.422618, 0.906308, -0.264323, 0.405193, 1.54198e-19)
 
 [node name="forearm2" parent="Node/ninja/body/leftarm" index="2"]
 transform = Transform3D(1, 0, 0, 0, 0.461749, -0.887011, 0, 0.887011, 0.461749, -0.00651042, -0.305035, -1.38778e-18)
@@ -66,7 +77,7 @@ transform = Transform3D(0.996195, 0.0871558, 0, -0.0262082, 0.299561, -0.953717,
 transform = Transform3D(1, 0, 0, 0, 0.21644, 0.976296, 0, -0.976296, 0.21644, -0.00353423, -0.404514, 0.00472222)
 
 [node name="foot22" parent="Node/ninja/leftleg/shin22" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 1.85037e-17, -0.298611, 0.00944444)
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871558, 0, 0.0871558, 0.996195, 1.85037e-17, -0.298611, 0.00944444)
 
 [node name="NinjaCollider" type="StaticBody3D" parent="." index="2"]
 
@@ -89,3 +100,13 @@ amount = 10
 lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_4bkm5")
 draw_pass_1 = SubResource("BoxMesh_m8yfn")
+
+[node name="SmokeParticles" type="GPUParticles3D" parent="." index="6"]
+layers = 2
+emitting = false
+amount = 20
+one_shot = true
+visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_o4y8r")
+draw_pass_1 = SubResource("SphereMesh_gbuyr")

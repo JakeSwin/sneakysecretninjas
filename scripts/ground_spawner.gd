@@ -31,7 +31,7 @@ var forest_tile = preload("res://scenes/forest_tile.tscn")
 var spawn_interval: float = 1
 var time_since_last_spawn: float = 0.0
 var tile_width = 16 
-var tile_length = 50
+var tile_length = 25
 var cell_size = 0.5
 var starting_tile_amount = 11
 var tiles: Array = []
@@ -210,8 +210,8 @@ func cover_grid(tile):
 			if noise_value > 0.4 and can_place_cover(x, z): #Increase/decrease the float to decrease/increase the amount of cover
 				spawn_cover(tile, Vector3(x, 0, z))
 				has_cover = true
-			#if noise_value > 0.45:
-				#spawn_spotlight(tile, Vector3(x, 0, z))
+			if noise_value > 0.5:
+				spawn_spotlight(tile, Vector3(x, 4, z))
 		#if initial == false:
 			#await get_tree().create_timer(0.001).timeout
 			
@@ -307,7 +307,7 @@ func spawn_spotlight(tile, position):
 	
 	var new_spotlight = spotlight_scene.instantiate()
 	new_spotlight.position = position
-	new_spotlight.scale *= randf_range(0.9, 1.1)
+	#new_spotlight.scale *= randf_range(0.9, 1.1)
 	
 	if tile == null or not is_instance_valid(tile):
 		new_spotlight.queue_free()

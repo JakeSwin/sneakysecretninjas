@@ -19,9 +19,17 @@ config/features=PackedStringArray("4.3", "Mobile")
 SignalBus="*res://scripts/signal_bus.gd"
 Global="*res://scripts/global.gd"
 
+[display]
+
+window/size/always_on_top=true
+
 [dotnet]
 
 project/assembly_name="SneakySecretNinjas"
+
+[global_group]
+
+ninja=""
 
 [input]
 

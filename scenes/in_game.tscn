@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://hflp43gvv8km"]
+[gd_scene load_steps=15 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Texture2D" uid="uid://c0aagyjmkdg7y" path="res://assets/throwing-star-153835_640.png" id="1_g3ouc"]
 [ext_resource type="Script" path="res://scripts/shuriken.gd" id="2_o8vlt"]
 [ext_resource type="Script" path="res://scripts/smoke_bomb.gd" id="2_rgn3x"]
 [ext_resource type="Texture2D" uid="uid://l8gue77fnqyp" path="res://assets/6319455.png" id="3_k8ddx"]
+[ext_resource type="Script" path="res://scripts/label.gd" id="5_8h54k"]
+[ext_resource type="Script" path="res://scripts/SaveData.gd" id="6_85csr"]
+[ext_resource type="FontFile" uid="uid://chy56ut33g38" path="res://assets/font/AsianNinja-z874L.ttf" id="7_fxngj"]
+[ext_resource type="Script" path="res://scripts/v_box_container_2.gd" id="7_wm74y"]
+[ext_resource type="Script" path="res://scripts/lebutton.gd" id="9_dofrt"]
+[ext_resource type="Script" path="res://scripts/menubutton.gd" id="9_qypjf"]
 
 [sub_resource type="Shortcut" id="Shortcut_vy1b1"]
 
@@ -11,6 +17,11 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1rmh"]
 bg_color = Color(0.21, 0.21, 0.21, 0.462745)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b1x8o"]
+font = ExtResource("7_fxngj")
+font_size = 32
+font_color = Color(1, 0.384314, 1, 1)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -105,6 +116,59 @@ one_shot = true
 wait_time = 0.1
 
 [node name="Timer3" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
+wait_time = 2.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 2.0
+offset_right = 698.0
+offset_bottom = 61.0
+script = ExtResource("5_8h54k")
+
+[node name="Timer" type="Timer" parent="Label"]
+
+[node name="SaverLoader" type="Node" parent="."]
+script = ExtResource("6_85csr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.401
+anchor_top = 0.475
+anchor_right = 0.602
+anchor_bottom = 0.616
+offset_left = -461.952
+offset_top = 0.199982
+offset_right = 458.496
+offset_bottom = -58.168
+mouse_filter = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+script = ExtResource("7_wm74y")
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "You were caught!"
+label_settings = SubResource("LabelSettings_b1x8o")
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_fxngj")
+text = "Retry"
+script = ExtResource("9_dofrt")
+
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_fxngj")
+text = "Return to menu"
+script = ExtResource("9_qypjf")
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Shuriken" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_pressed"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/Shuriken/Label/Timer" to="VBoxContainer/HBoxContainer/Shuriken" method="_on_timer_timeout"]
@@ -113,3 +177,6 @@ wait_time = 0.1
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_timeout"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer2" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_2_timeout"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer3" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Label/Timer" to="Label" method="_on_timer_timeout"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button" to="HBoxContainer/VBoxContainer2/Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button2" to="HBoxContainer/VBoxContainer2/Button2" method="_on_pressed"]
