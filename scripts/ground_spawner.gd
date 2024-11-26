@@ -210,8 +210,8 @@ func cover_grid(tile):
 			if noise_value > 0.4 and can_place_cover(x, z): #Increase/decrease the float to decrease/increase the amount of cover
 				spawn_cover(tile, Vector3(x, 0, z))
 				has_cover = true
-			if noise_value > 0.45:
-				spawn_spotlight(tile, Vector3(x, 0, z))
+			#if noise_value > 0.45:
+				#spawn_spotlight(tile, Vector3(x, 0, z))
 		#if initial == false:
 			#await get_tree().create_timer(0.001).timeout
 			

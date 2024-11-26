@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_hvnev"]
 [ext_resource type="PackedScene" uid="uid://hflp43gvv8km" path="res://scenes/in_game.tscn" id="4_w2c1b"]
 [ext_resource type="Script" path="res://follow_path.gd" id="6_02coy"]
-[ext_resource type="PackedScene" uid="uid://d4ieqh5kx13a2" path="res://scenes/guard.tscn" id="6_8vauw"]
+[ext_resource type="PackedScene" path="res://scenes/guard.tscn" id="6_8vauw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x2ljx"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
