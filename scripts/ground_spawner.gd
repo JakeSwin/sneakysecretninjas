@@ -26,19 +26,25 @@ var season_streak = 0
 #materials
 
 #tile
+var menu_tile = preload("res://scenes/forest_tile.tscn")
+var cave_tile = preload("res://scenes/forest_tile.tscn")
+var practice_tile = preload("res://scenes/practice_tile.tscn")
 var forest_tile = preload("res://scenes/forest_tile.tscn")
 @export var speed: float = 5
 var spawn_interval: float = 1
-var time_since_last_spawn: float = 0.0
+var time_since_last_spawn: float = 0.0 #Can be deleted I think
 var tile_width = 16 
 var tile_length = 25
 var cell_size = 0.5
-var starting_tile_amount = 11
+var starting_tile_amount = 15
 var tiles: Array = []
-var last_tile_position_z = -50 #This is so we can se a starting one at 0
-var occupied_cells = {}
+var last_tile_position_z = 75 #This is so we can se a starting one at 0
+var occupied_cover_cells = {}
 var z_offset = 0
-var delete_threshold = 50
+var delete_threshold = 100
+var tile_counter = -3
+var start_game = false
+var Start_game_timer = 5.0
 #tile
 
 #Cover
@@ -76,9 +82,12 @@ var big_trees = [
 	preload("res://Synty_assets/big_tree_1.tscn")]
 #tree
 
-#testing
+#obsticles
 @export var spotlight_scene: PackedScene
-#testing
+@export var guard_scene: PackedScene
+var guard_points = preload("res://Synty_assets/rock_1.tscn")
+var occupied_obstacle_cells = {}
+#obsticles
 
 func _ready():
 	#Prepares the materials
@@ -147,8 +156,27 @@ func calculate_spawn_interval():
 	#print("Spawn interval set to: ", spawn_interval)
 	
 func spawn_tile():
-	var next_tile = forest_tile.instantiate()
+	tile_counter += 1
+	var next_tile
 	var new_season = determine_next_season()
+	
+	match tile_counter:
+		-2, -1, 0, 1: 
+			next_tile = menu_tile.instantiate()
+			set_decorations(next_tile, 0.05)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season)
+		2:
+			next_tile = cave_tile.instantiate()
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season)
+		3, 4: #Tiles that only have cover and no obsticles to get the player ready
+			next_tile = practice_tile.instantiate()
+			set_decorations(next_tile, 0.02)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 40, new_season)
+		_:
+			next_tile = forest_tile.instantiate()
+			cover_grid(next_tile)
+			set_decorations(next_tile, 0)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season)
 	add_child(next_tile)
 	
 	if tiles.size() > 0:
@@ -156,21 +184,16 @@ func spawn_tile():
 		next_tile.global_transform.origin.z = last_tile.global_transform.origin.z - tile_length
 	else:
 		next_tile.global_transform.origin.z = last_tile_position_z
-		
+	print(next_tile.global_transform.origin.z)
 	tiles.append([next_tile, new_season])
-	print("Tile spawned with season: ", new_season)
+	#print("Tile spawned with season: ", new_season)
 	
-	cover_grid(next_tile)
-	#await delay(0.001)
-	spawn_decorations(next_tile, mushrooms, decoration_1, 0.75, 0.45, 0.3)
-	#await delay(0.001)
-	spawn_decorations(next_tile, rocks, decoration_2, 0.75, -0.26, 0.0)
-	#await delay(0.001)
-	spawn_decorations(next_tile, flowers, decoration_3, 0.25, -0.3, 0.3)
-	#await delay(0.001)
-	spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season)
-	#wait delay(0.001)
 	check_new_seed()
+
+func set_decorations(next_tile, increase_spawn_amount):
+	spawn_decorations(next_tile, mushrooms, decoration_1, 0.75, 0.45 - increase_spawn_amount, 0.3)
+	spawn_decorations(next_tile, rocks, decoration_2, 0.75, -0.26 - increase_spawn_amount, 0.0)
+	spawn_decorations(next_tile, flowers, decoration_3, 0.25, -0.3 - increase_spawn_amount, 0.3)
 
 func delay(seconds):
 	await get_tree().create_timer(seconds).timeout
@@ -207,13 +230,11 @@ func cover_grid(tile):
 			var z = (row * cell_size) - (tile_length / 2)
 			
 			var noise_value = cover_noise.get_noise_2d(fposmod(x, float(max_noise_range)), fposmod(z + z_offset, float(max_noise_range)))
-			if noise_value > 0.4 and can_place_cover(x, z): #Increase/decrease the float to decrease/increase the amount of cover
+			if noise_value > 0.4 and can_place_cover(x, z, false, 4): #Increase/decrease the float to decrease/increase the amount of cover
 				spawn_cover(tile, Vector3(x, 0, z))
 				has_cover = true
-			if noise_value > 0.5:
-				spawn_spotlight(tile, Vector3(x, 4, z))
-		#if initial == false:
-			#await get_tree().create_timer(0.001).timeout
+			if noise_value < -0.45 and can_place_cover(x, z, true, 13):
+				spawn_spotlight_or_guard(tile, x, z)
 			
 		if has_cover:
 			consecutive_empty_rows = 0
@@ -224,52 +245,28 @@ func cover_grid(tile):
 			backup_cover(tile, row, cols)
 			consecutive_empty_rows = 0
 			
-	#debug_print_occupied_cells()
-	occupied_cells.clear()
+	occupied_cover_cells.clear()
+	occupied_obstacle_cells.clear()
 	
 	z_offset = (z_offset + tile_length) % max_noise_range
 
-#This is for debugging
-func debug_print_occupied_cells():
-	# Determine the range of cells to cover in the output
-	var cols = int(tile_width / cell_size)
-	var rows = int(tile_length / cell_size)
+func can_place_cover(x, z, is_obstacle, range):
+	var occupied_list = occupied_obstacle_cells if is_obstacle else occupied_cover_cells #Give the function true for obsticles, false for cover
 	
-	# Create a 2D list to represent the map
-	var map_grid = []
-	for row in range(rows):
-		map_grid.append([])  # Create an empty row
-		for col in range(cols):
-			map_grid[row].append(".")  # Use '.' to represent empty spaces initially
-	
-	# Mark occupied cells with an 'X'
-	for cell in occupied_cells:
-		# Assuming the 'cell' is a Vector2, where x is the x position and y is the z position
-		var col_index = int((cell.x + (tile_width / 2)) / cell_size)
-		var row_index = int((cell.y + (tile_length / 2)) / cell_size)
-		
-		# Ensure the indices are within bounds
-		if row_index >= 0 and row_index < rows and col_index >= 0 and col_index < cols:
-			map_grid[row_index][col_index] = "X"
-	
-	# Print the map in a grid format
-	print("Occupied Cells Map:")
-	for row in map_grid:
-		print("".join(row))
-
-func can_place_cover(x, z):
-	for dx in range(-4, 5):
-		for dz in range(-4, 5):
+	for dx in range(-range, range + 1):
+		for dz in range(-range, range + 1):
 			var check_position = Vector2(x + dx * cell_size, z + dz * cell_size)
-			if occupied_cells.has(check_position):
+			if occupied_list.has(check_position):
 				return false
 	return true
 
-func mark_surrounding_cells(x, z):
-	for dx in range(-4, 5):
-		for dz in range(-4, 5):
+func mark_surrounding_cells(x, z, is_obstacle, range):
+	var occupied_list = occupied_obstacle_cells if is_obstacle else occupied_cover_cells
+	
+	for dx in range(-range, range + 1):
+		for dz in range(-range, range + 1):
 			var occupied_position = Vector2(x + dx * cell_size, z + dz * cell_size)
-			occupied_cells[occupied_position] = true
+			occupied_list[occupied_position] = true
 
 func spawn_cover(tile, position):
 	var material_choices = get_season_materials(current_season)
@@ -279,7 +276,7 @@ func spawn_cover(tile, position):
 	new_cover.rotation.y = deg_to_rad(rng.randi_range(0, 360))
 	new_cover.scale *= randf_range(0.9, 1.1)
 	tile.add_child(new_cover)
-	mark_surrounding_cells(position.x, position.z)
+	mark_surrounding_cells(position.x, position.z, false, 4)
 	
 	var cover_mesh = new_cover.get_child(0)
 	#changes bush colour based on current season
@@ -297,22 +294,42 @@ func backup_cover(tile, row, cols):
 	var x = (random_col * cell_size) - (tile_width / 2)
 	var z = (row * cell_size) - (tile_length / 2)
 	
-	if can_place_cover(x, z):
+	if can_place_cover(x, z, false, 4):
 		spawn_cover(tile, Vector3(x, 0, z))
 
-func spawn_spotlight(tile, position):
-	if spotlight_scene == null:
-		print("Spotlight scene is not set")
-		return
-	
-	var new_spotlight = spotlight_scene.instantiate()
-	new_spotlight.position = position
-	#new_spotlight.scale *= randf_range(0.9, 1.1)
-	
-	if tile == null or not is_instance_valid(tile):
-		new_spotlight.queue_free()
-		return
-	tile.add_child(new_spotlight) # Add the spotlight to the tile
+func find_guard_points(start_x, start_z):
+	var direction_x = rng.randf_range(-1, 1)
+	var direction_z = rng.randf_range(-1, 1)
+	var direction = Vector2(direction_x, direction_z).normalized()  #Normalize the direction to avoid overly large movements
+	var range = rng.randi_range(5, 15)  #The range the guard will walk (change if you want)
+	var point1 = Vector2(start_x, start_z)
+	var point2 = point1 + direction * range
+	return [point1, point2]
+
+#spawns a spotlight or guard with a %
+func spawn_spotlight_or_guard(tile, x, z):
+	if rng.randf() < 0.5: 
+		var new_spotlight = spotlight_scene.instantiate()
+		new_spotlight.position = Vector3(x, 5, z)
+		tile.add_child(new_spotlight)
+		mark_surrounding_cells(position.x, position.z, true, 13)
+	else:
+		var random_points = find_guard_points(x, z)
+		
+		#These rocks are here to visualise the path they will walk
+		var rock1 = guard_points.instantiate()
+		rock1.position = Vector3(random_points[0].x, 0, random_points[0].y)  # Use the x and z values from the valid points
+		rock1.scale = Vector3(0.1, 10, 0.1)
+		tile.add_child(rock1)
+		var rock2 = guard_points.instantiate()
+		rock2.position = Vector3(random_points[1].x, 0, random_points[1].y)  # Use the x and z values from the valid points
+		rock2.scale = Vector3(0.1, 10, 0.1)
+		tile.add_child(rock2)
+		
+		var new_guard = guard_scene.instantiate()
+		new_guard.position = Vector3(random_points[0].x, 0, random_points[0].y)
+		tile.add_child(new_guard)
+		mark_surrounding_cells(random_points[0].x, random_points[0].y, true, 13)
 
 func spawn_decorations(tile, decoration_scene: Array, noise_map, cell_size, noise_threshold, position_y):
 	var material_choices = get_season_materials(current_season)
