@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://fhrrq4h0jv4b"]
+
+[ext_resource type="Texture2D" uid="uid://cyk83v3sr7lmd" path="res://synty/Ground_Textures/Grass_02.png" id="1_lbd1q"]
+[ext_resource type="Script" path="res://scripts/ground.gd" id="2_h0ftp"]
+[ext_resource type="PackedScene" uid="uid://c6uo7v736i27k" path="res://Synty_assets/cave_entrance1.tscn" id="3_lc5mh"]
+[ext_resource type="PackedScene" uid="uid://bphwodmqmxe83" path="res://Synty_assets/cave_interior.tscn" id="4_ww144"]
+[ext_resource type="PackedScene" uid="uid://cutn0u64vao5a" path="res://Synty_assets/cave_exterior.tscn" id="5_wo04v"]
+[ext_resource type="PackedScene" uid="uid://b0h3mwai2y4ju" path="res://Synty_assets/skull.tscn" id="6_uynm3"]
+[ext_resource type="PackedScene" uid="uid://bvvl84g5uy2p5" path="res://Synty_assets/vines_1.tscn" id="7_ppv04"]
+[ext_resource type="PackedScene" uid="uid://bgji1mox3osrr" path="res://Synty_assets/cave_mushrooms.tscn" id="8_hcli5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgguq"]
+albedo_texture = ExtResource("1_lbd1q")
+uv1_scale = Vector3(20, 8, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h5h1k"]
+size = Vector3(100, 0.5, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d645k"]
+albedo_color = Color(0, 0.384314, 0.129412, 1)
+uv1_scale = Vector3(1.255, 1.255, 1.255)
+uv2_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w1itx"]
+size = Vector3(2, 1, 2)
+
+[node name="Ground" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000190735, -1.90735e-06, -5.12327)
+material_override = SubResource("StandardMaterial3D_jgguq")
+mesh = SubResource("BoxMesh_h5h1k")
+surface_material_override/0 = SubResource("StandardMaterial3D_d645k")
+script = ExtResource("2_h0ftp")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_w1itx")
+
+[node name="SM_Rock_CaveEntrance_01" parent="." instance=ExtResource("3_lc5mh")]
+transform = Transform3D(1.75, 0, 0, 0, 1.167, 0, 0, 0, 1.167, 0, 0, 7.5)
+
+[node name="SM_Rock_CaveEntrance_02" parent="." instance=ExtResource("3_lc5mh")]
+transform = Transform3D(-1.75, 0, -1.76212e-07, 0, 1.167, 0, 2.64243e-07, 0, -1.167, 0, 0, -7.5)
+
+[node name="SM_Rock_CaveInterior_01" parent="." instance=ExtResource("4_ww144")]
+transform = Transform3D(1.75, 0, 0, 0, 1.167, 0, 0, 0, 1.167, 0, 0, 0)
+
+[node name="SM_Rock_Pile_Curved_02" parent="." instance=ExtResource("5_wo04v")]
+transform = Transform3D(-1.74846e-07, -2.99269, 0.209268, 0, 0.209268, 2.99269, -4, 1.30815e-07, -9.1474e-09, -4.73705, 2.54468, -0.100277)
+
+[node name="SM_Rock_Pile_Curved_03" parent="." instance=ExtResource("5_wo04v")]
+transform = Transform3D(-1.74846e-07, 2.99269, -0.20927, 0, 0.20927, 2.99269, 4, 1.30815e-07, -9.14746e-09, 4.737, 2.545, -0.1)
+
+[node name="SM_Rock_Pile_Curved_04" parent="." instance=ExtResource("5_wo04v")]
+transform = Transform3D(-1.31134e-07, 0, 2, 0, 2, 0, -3, 0, -8.74228e-08, 0.0210342, 7, -0.251864)
+
+[node name="SM_Rock_Pile_Curved_05" parent="." instance=ExtResource("5_wo04v")]
+transform = Transform3D(-1.16709e-07, 0, 2.003, 0, 2.003, 0, -2.67, 0, -8.75539e-08, 2.97714, -0.850943, -0.490195)
+
+[node name="SM_Rock_Pile_Curved_06" parent="." instance=ExtResource("5_wo04v")]
+transform = Transform3D(-1.16709e-07, 0, 2.003, 0, 2.003, 0, -2.67, 0, -8.75539e-08, -1.02957, -0.850943, -0.63872)
+
+[node name="SM_Prop_Skull_01" parent="." instance=ExtResource("6_uynm3")]
+transform = Transform3D(3.64848, -0.525707, 1.55313, 0, 3.78884, 1.28245, -1.63969, -1.16975, 3.45588, -1.53723, 1.02318, 5.32988)
+
+[node name="SM_Tree_Vines_04" parent="." instance=ExtResource("7_ppv04")]
+transform = Transform3D(0.694658, 0, -0.71934, 0, 0.8, 0, 0.71934, 0, 0.694658, -0.896661, 5.18979, 5.85555)
+
+[node name="SM_Tree_Vines_05" parent="." instance=ExtResource("7_ppv04")]
+transform = Transform3D(-0.743145, 0, -0.669131, 0, 0.3, 0, 0.669131, 0, -0.743145, 1.154, 3.295, 7.626)
+
+[node name="SM_Plant_Mushrooms_01" parent="." instance=ExtResource("8_hcli5")]
+transform = Transform3D(1.67949, 1.06741, -0.199905, -1.02546, 1.43764, -0.938943, -0.357421, 0.890969, 1.75454, -2.56973, 2.71981, 8.09171)
+
+[node name="SM_Plant_Mushrooms_02" parent="." instance=ExtResource("8_hcli5")]
+transform = Transform3D(-0.614309, -0.689165, -0.384286, -0.51273, 0.718821, -0.469472, 0.599776, -0.0913656, -0.794934, 1.45901, 2.71981, 9.29021)
+
+[node name="SM_Tree_Vines_06" parent="." instance=ExtResource("7_ppv04")]
+transform = Transform3D(0.694658, 0, -0.71934, 0, 0.8, 0, 0.71934, 0, 0.694658, 0.899549, 5.18979, -6.07134)

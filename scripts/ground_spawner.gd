@@ -26,11 +26,11 @@ var season_streak = 0
 #materials
 
 #tile
-var menu_tile = preload("res://scenes/forest_tile.tscn")
-var cave_tile = preload("res://scenes/forest_tile.tscn")
+var menu_tile = preload("res://scenes/menu_tile.tscn")
+var cave_tile = preload("res://scenes/cave_tile.tscn")
 var practice_tile = preload("res://scenes/practice_tile.tscn")
 var forest_tile = preload("res://scenes/forest_tile.tscn")
-@export var speed: float = 5
+@export var speed: float = 1
 var spawn_interval: float = 1
 var time_since_last_spawn: float = 0.0 #Can be deleted I think
 var tile_width = 16 
@@ -43,8 +43,7 @@ var occupied_cover_cells = {}
 var z_offset = 0
 var delete_threshold = 100
 var tile_counter = -3
-var start_game = false
-var Start_game_timer = 5.0
+var stop_game = false
 #tile
 
 #Cover
@@ -84,12 +83,13 @@ var big_trees = [
 
 #obsticles
 @export var spotlight_scene: PackedScene
-@export var guard_scene: PackedScene
+var guard_scene = preload("res://scenes/guard_walking.tscn")
 var guard_points = preload("res://Synty_assets/rock_1.tscn")
 var occupied_obstacle_cells = {}
 #obsticles
 
 func _ready():
+	SignalBus.connect("caught", Callable(self, "_on_player_caught"))
 	#Prepares the materials
 	var material1 = StandardMaterial3D.new()
 	material1.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_01.png")
@@ -134,8 +134,12 @@ func new_noise_seed():
 	tree_noise.noise_type = FastNoiseLite.TYPE_CELLULAR
 	tree_noise.frequency = 10
 
+func _on_player_caught(player_object):
+	stop_game = true
+
 #Updates each tile's position using an array, if they are out a set range, it is deleted and a new one is spawned
 func _process(delta):
+	if stop_game == true: return
 	for i in range(tiles.size()):
 		var tile = tiles[i][0]
 		
@@ -161,22 +165,26 @@ func spawn_tile():
 	var new_season = determine_next_season()
 	
 	match tile_counter:
-		-2, -1, 0, 1: 
+		-2, -1:
 			next_tile = menu_tile.instantiate()
 			set_decorations(next_tile, 0.05)
-			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season, true)
+		0, 1: 
+			next_tile = menu_tile.instantiate()
+			set_decorations(next_tile, 0.05)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season, false)
 		2:
 			next_tile = cave_tile.instantiate()
-			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season)
-		3, 4: #Tiles that only have cover and no obsticles to get the player ready
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 50, new_season, false)
+		3: #Tiles that only have cover and no obsticles to get the player ready
 			next_tile = practice_tile.instantiate()
 			set_decorations(next_tile, 0.02)
-			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 40, new_season)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 40, new_season, false)
 		_:
 			next_tile = forest_tile.instantiate()
-			cover_grid(next_tile)
+			cover_grid(next_tile, tile_counter)
 			set_decorations(next_tile, 0)
-			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season)
+			spawn_trees(next_tile, small_trees, tree_noise, 3, -0.6, 30, new_season, false)
 	add_child(next_tile)
 	
 	if tiles.size() > 0:
@@ -184,7 +192,7 @@ func spawn_tile():
 		next_tile.global_transform.origin.z = last_tile.global_transform.origin.z - tile_length
 	else:
 		next_tile.global_transform.origin.z = last_tile_position_z
-	print(next_tile.global_transform.origin.z)
+	print(next_tile.global_transform.origin.z, "   ", tile_counter)
 	tiles.append([next_tile, new_season])
 	#print("Tile spawned with season: ", new_season)
 	
@@ -216,7 +224,7 @@ func determine_next_season() -> String:
 		season_streak += 1
 	return current_season
 
-func cover_grid(tile):
+func cover_grid(tile, tile_counter):
 	var cols = int(tile_width / cell_size)
 	var rows = int(tile_length / cell_size)
 	var consecutive_empty_rows = 0
@@ -233,7 +241,9 @@ func cover_grid(tile):
 			if noise_value > 0.4 and can_place_cover(x, z, false, 4): #Increase/decrease the float to decrease/increase the amount of cover
 				spawn_cover(tile, Vector3(x, 0, z))
 				has_cover = true
-			if noise_value < -0.45 and can_place_cover(x, z, true, 13):
+			if tile_counter == 4:
+				continue
+			elif noise_value < -0.45 and can_place_cover(x, z, true, 13):
 				spawn_spotlight_or_guard(tile, x, z)
 			
 		if has_cover:
@@ -315,19 +325,13 @@ func spawn_spotlight_or_guard(tile, x, z):
 		mark_surrounding_cells(position.x, position.z, true, 13)
 	else:
 		var random_points = find_guard_points(x, z)
-		
-		#These rocks are here to visualise the path they will walk
-		var rock1 = guard_points.instantiate()
-		rock1.position = Vector3(random_points[0].x, 0, random_points[0].y)  # Use the x and z values from the valid points
-		rock1.scale = Vector3(0.1, 10, 0.1)
-		tile.add_child(rock1)
-		var rock2 = guard_points.instantiate()
-		rock2.position = Vector3(random_points[1].x, 0, random_points[1].y)  # Use the x and z values from the valid points
-		rock2.scale = Vector3(0.1, 10, 0.1)
-		tile.add_child(rock2)
-		
 		var new_guard = guard_scene.instantiate()
-		new_guard.position = Vector3(random_points[0].x, 0, random_points[0].y)
+		var curve = Curve3D.new()
+		curve.add_point(Vector3(random_points[0].x, 0, random_points[0].y))
+		curve.add_point(Vector3(random_points[1].x, 0, random_points[1].y))
+		curve.add_point(Vector3(random_points[0].x, 0, random_points[0].y))
+		new_guard.curve = curve
+	
 		tile.add_child(new_guard)
 		mark_surrounding_cells(random_points[0].x, random_points[0].y, true, 13)
 
@@ -361,7 +365,7 @@ func spawn_decorations(tile, decoration_scene: Array, noise_map, cell_size, nois
 				
 				tile.add_child(new_decoration)
 
-func spawn_trees(tile, tree_scene, noise_map, cell_size, noise_threshold, extra_width, new_season: String):
+func spawn_trees(tile, tree_scene, noise_map, cell_size, noise_threshold, extra_width, new_season: String, is_start):
 	var total_width = tile_width + 2 * extra_width
 	var lane_half_width = tile_width / 4
 	var lane_buffer = lane_half_width + 1.5 * cell_size #Doesn't place trees within N cell spaces each side next to the lane
@@ -386,13 +390,14 @@ func spawn_trees(tile, tree_scene, noise_map, cell_size, noise_threshold, extra_
 			z += rng.randf_range(-wiggle_room, wiggle_room)
 			
 			#Makes sure the trees are not in the path of the ninja
-			if abs(x) <= lane_buffer and abs(z) <= (tile_length / 2):
-				continue
-			if abs(x) <= lane_half_width and abs(z) <= (tile_length / 4):
-				continue
-			if abs(x) > (total_width / 2) or abs(z) > (tile_length / 2):
-				continue
-				
+			if is_start == false:
+				if abs(x) <= lane_buffer and abs(z) <= (tile_length / 2):
+					continue
+				if abs(x) <= lane_half_width and abs(z) <= (tile_length / 4):
+					continue
+				if abs(x) > (total_width / 2) or abs(z) > (tile_length / 2):
+					continue
+			
 			var noise_value = noise_map.get_noise_2d(fposmod(x, float(max_noise_range)), fposmod(z + z_offset, float(max_noise_range)))
 			
 			#Selects the tree type based on place on tile
@@ -433,3 +438,6 @@ func check_new_seed():
 	if accumulated_z_distance >= max_noise_range:
 		accumulated_z_distance = 0.0
 		new_noise_seed()
+
+func _on_timer_timeout() -> void:
+	speed *= 1.2

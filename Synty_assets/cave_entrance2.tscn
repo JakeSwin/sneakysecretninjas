@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqu2ab5vutwro"]
+
+[ext_resource type="PackedScene" uid="uid://dw3uq1ll8rsfv" path="res://Synty_assets/SM_Rock_CaveEntrance_02.fbx" id="1_4nfue"]
+[ext_resource type="Texture2D" uid="uid://du8q4ubj04h3s" path="res://Synty_assets/Synty_assets_textures/PolygonNature_03.png" id="2_f3iyf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udqsv"]
+albedo_texture = ExtResource("2_f3iyf")
+
+[node name="SM_Rock_CaveEntrance_02" instance=ExtResource("1_4nfue")]
+
+[node name="SM_Rock_CaveEntrance_02" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_udqsv")

@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgji1mox3osrr"]
+
+[ext_resource type="PackedScene" uid="uid://caystd6r05h10" path="res://Synty_assets/SM_Plant_Mushrooms_01.fbx" id="1_iuguh"]
+[ext_resource type="Texture2D" uid="uid://ucs8toeuku15" path="res://Synty_assets/Synty_assets_textures/PolygonNature_01.png" id="2_rsslj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_re38e"]
+albedo_texture = ExtResource("2_rsslj")
+
+[node name="SM_Plant_Mushrooms_01" instance=ExtResource("1_iuguh")]
+
+[node name="SM_Plant_Mushrooms_01" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_re38e")
