@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://baklagwuomlx" path="res://assets/Guard.gltf" id="1_0f5rj"]
 [ext_resource type="PackedScene" uid="uid://inh1k3tn3868" path="res://scenes/spotlight.tscn" id="2_eims0"]
-[ext_resource type="Script" path="res://guard.gd" id="2_flj80"]
+[ext_resource type="Script" path="res://scripts/guard.gd" id="2_flj80"]
 
 [node name="guard" instance=ExtResource("1_0f5rj")]
 script = ExtResource("2_flj80")

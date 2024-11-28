@@ -6,6 +6,8 @@ extends Node3D
 @onready var alert_sound = $AudioStreamPlayer
 @onready var dash_particles: GPUParticles3D = $DashParticles
 @onready var smoke_particles: GPUParticles3D = $SmokeParticles
+@onready var smoke_particles_2: GPUParticles3D = $SmokeParticles2
+@onready var smoke_particles_3: GPUParticles3D = $SmokeParticles3
 
 var lerp_weight = 0.1
 var moving: bool = false
@@ -35,15 +37,23 @@ func _process(delta: float) -> void:
 
 	if Global.smoked == true:
 		var pos = smoke_particles.global_position
-		pos.x = ninja.global_position.x + randf_range(-0.4, 0.4)
-		pos.y = ninja.global_position.y + 2
+		pos.x = ninja.global_position.x
+		pos.y = ninja.global_position.y + 1.5
 		pos.z = ninja.global_position.z
 		smoke_particles.global_position = pos
+		pos.x += 0.2
+		pos.y -= 0.25
+		smoke_particles_2.global_position = pos
+		pos.x -= 0.4
+		smoke_particles_3.global_position = pos
 		$SmokeParticles.emitting = true
+		$SmokeParticles2.emitting = true
+		$SmokeParticles3.emitting = true
 	else:
 		$SmokeParticles.emitting = false
-	
-	
+		$SmokeParticles2.emitting = false
+		$SmokeParticles3.emitting = false
+
 func set_move_target(object: Node3D):
 	target_node = object
 	moving = true

@@ -104,8 +104,31 @@ draw_pass_1 = SubResource("BoxMesh_m8yfn")
 [node name="SmokeParticles" type="GPUParticles3D" parent="." index="6"]
 layers = 2
 emitting = false
-amount = 20
+amount = 4
 one_shot = true
+randomness = 1.0
+visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_o4y8r")
+draw_pass_1 = SubResource("SphereMesh_gbuyr")
+
+[node name="SmokeParticles2" type="GPUParticles3D" parent="." index="7"]
+layers = 2
+emitting = false
+amount = 4
+one_shot = true
+randomness = 1.0
+visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_o4y8r")
+draw_pass_1 = SubResource("SphereMesh_gbuyr")
+
+[node name="SmokeParticles3" type="GPUParticles3D" parent="." index="8"]
+layers = 2
+emitting = false
+amount = 4
+one_shot = true
+randomness = 1.0
 visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_o4y8r")
