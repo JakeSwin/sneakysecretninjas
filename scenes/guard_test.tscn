@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://8han1xkivtrg"]
+
+[ext_resource type="PackedScene" uid="uid://baklagwuomlx" path="res://assets/Guard.gltf" id="1_57667"]
+[ext_resource type="Script" path="res://guard.gd" id="2_mdepk"]
+
+[node name="blockbench_export" instance=ExtResource("1_57667")]
+script = ExtResource("2_mdepk")

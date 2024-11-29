@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bovlq5aa41e3e"]
+
+[ext_resource type="Texture2D" uid="uid://cyk83v3sr7lmd" path="res://synty/Ground_Textures/Grass_02.png" id="1_g63me"]
+[ext_resource type="Script" path="res://scripts/ground.gd" id="2_wddu4"]
+[ext_resource type="PackedScene" uid="uid://bfhryf8p1ufhj" path="res://scenes/bush_1.tscn" id="3_wdr3a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgguq"]
+albedo_texture = ExtResource("1_g63me")
+uv1_scale = Vector3(20, 8, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h5h1k"]
+size = Vector3(100, 0.5, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d645k"]
+albedo_color = Color(0, 0.384314, 0.129412, 1)
+uv1_scale = Vector3(1.255, 1.255, 1.255)
+uv2_scale = Vector3(10, 10, 10)
+
+[node name="Ground" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0198314, -1.43051e-06, -5.11384)
+material_override = SubResource("StandardMaterial3D_jgguq")
+mesh = SubResource("BoxMesh_h5h1k")
+surface_material_override/0 = SubResource("StandardMaterial3D_d645k")
+script = ExtResource("2_wddu4")
+
+[node name="Starting Tile" parent="." instance=ExtResource("3_wdr3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116472, 4.76837e-07, -2.25199)

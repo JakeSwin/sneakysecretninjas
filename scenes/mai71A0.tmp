@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8xex23fcqoug"]
+
+[ext_resource type="Script" path="res://scripts/ground_spawner.gd" id="1_xl2vg"]
+[ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="2_04yp1"]
+[ext_resource type="PackedScene" uid="uid://choeqtgqnic36" path="res://scenes/spotlight.tscn" id="2_ns3t7"]
+[ext_resource type="PackedScene" uid="uid://8han1xkivtrg" path="res://scenes/guard_test.tscn" id="3_2rxgx"]
+[ext_resource type="PackedScene" uid="uid://hflp43gvv8km" path="res://scenes/in_game.tscn" id="4_3ul47"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cq3bw"]
+sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
+sky_energy_multiplier = 0.5
+ground_bottom_color = Color(0.0848845, 0.107482, 0.122953, 1)
+sun_angle_max = 110.0
+
+[sub_resource type="Sky" id="Sky_aqnvg"]
+sky_material = SubResource("ProceduralSkyMaterial_cq3bw")
+
+[sub_resource type="Environment" id="Environment_jar65"]
+background_mode = 2
+sky = SubResource("Sky_aqnvg")
+ambient_light_sky_contribution = 0.1
+tonemap_mode = 1
+glow_enabled = true
+glow_strength = 0.7
+glow_blend_mode = 0
+fog_mode = 1
+fog_light_color = Color(0.0020102, 0.0724503, 0.0936709, 1)
+fog_density = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aeit2"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lhvmu"]
+size = Vector3(1, 10, 500)
+
+[node name="Main" type="Node3D"]
+
+[node name="CameraPivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.743144, 0.66913, 0, -0.66913, 0.743144, 0, 9, 8)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+
+[node name="GroundSpawner" type="Node3D" parent="."]
+script = ExtResource("1_xl2vg")
+speed = null
+spotlight_scene = ExtResource("2_ns3t7")
+guard_scene = ExtResource("3_2rxgx")
+
+[node name="Ninja start" type="Node3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.951057, -0.25, 0.181636, 0, 0.587785, 0.809017, -0.309017, -0.769421, 0.559017, 1.12898, 9.24279, 4.51054)
+light_color = Color(0.534771, 0.549834, 0.654056, 1)
+light_energy = 0.25
+shadow_enabled = true
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jar65")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -0.866025, -3.78552e-08, 0.5, 0.5, 2.18557e-08, 0.866025, 0, 2, 0)
+light_color = Color(0.209959, 0.331491, 0.977169, 1)
+light_energy = 0.4
+shadow_enabled = true
+shadow_blur = 5.0
+
+[node name="ninjav2" parent="." node_paths=PackedStringArray("target_node", "camera_node") instance=ExtResource("2_04yp1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+target_node = NodePath("../Ninja start")
+camera_node = NodePath("../CameraPivot/Camera3D")
+
+[node name="Control" parent="." instance=ExtResource("4_3ul47")]
+
+[node name="RVoid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+material_override = SubResource("StandardMaterial3D_aeit2")
+mesh = SubResource("BoxMesh_lhvmu")
+
+[node name="LVoid" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0)
+material_override = SubResource("StandardMaterial3D_aeit2")
+mesh = SubResource("BoxMesh_lhvmu")
