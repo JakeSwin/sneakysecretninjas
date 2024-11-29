@@ -33,6 +33,9 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_lhvmu"]
 size = Vector3(1, 20, 500)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qs62n"]
+size = Vector3(31.02, 6.13721, 2.77734)
+
 [sub_resource type="BoxMesh" id="BoxMesh_vqwpn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnch0"]
@@ -41,9 +44,6 @@ emission_enabled = true
 emission = Color(1, 0.94075, 0.329242, 1)
 emission_energy_multiplier = 5.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qs62n"]
-size = Vector3(31.02, 6.13721, 2.77734)
-
 [node name="Main" type="Node3D"]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
@@ -51,13 +51,13 @@ transform = Transform3D(1, 0, 0, 0, 0.743144, 0.66913, 0, -0.66913, 0.743144, 0,
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -2.98023e-08, 1, 0.00861645, 0.0125122, -0.013896)
+current = true
 
 [node name="CameraPivot2" type="Marker3D" parent="."]
 transform = Transform3D(0.692143, -0.231405, 0.683658, 0, 0.947209, 0.320613, -0.72176, -0.22191, 0.655604, 2.64797, 3.23222, -8.70734)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot2"]
 transform = Transform3D(1, -1.49012e-08, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.0413256, -0.00304413, 0.0089941)
-current = true
 
 [node name="GroundSpawner" type="Node3D" parent="."]
 script = ExtResource("1_xl2vg")
@@ -108,46 +108,58 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 
 material_override = SubResource("StandardMaterial3D_aeit2")
 mesh = SubResource("BoxMesh_lhvmu")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, -39.1)
-visible = false
-mesh = SubResource("BoxMesh_vqwpn")
-material = SubResource("StandardMaterial3D_wnch0")
+[node name="Helicopter" type="Node" parent="."]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
+[node name="SpotLight3D" type="SpotLight3D" parent="Helicopter"]
 transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 2, 4, -37)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 spot_range = 5.81319
 spot_angle = 44.6794
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="."]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 8, 4, -37)
+[node name="SpotLight3D2" type="SpotLight3D" parent="Helicopter"]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 6, 4, -37)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 spot_range = 5.81319
 spot_angle = 44.6794
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+[node name="SpotLight3D3" type="SpotLight3D" parent="Helicopter"]
 transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -2, 4, -37)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 spot_range = 5.81319
 spot_angle = 44.6794
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="."]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -8, 4, -37)
+[node name="SpotLight3D4" type="SpotLight3D" parent="Helicopter"]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -6, 4, -37)
 light_color = Color(0.96251, 0.961126, 0, 1)
 light_energy = 20.0
 spot_range = 5.81319
 spot_angle = 44.6794
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37)
+[node name="Area3D" type="Area3D" parent="Helicopter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38)
+input_ray_pickable = false
+monitoring = false
+monitorable = false
 script = ExtResource("5_ajdqg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Helicopter/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100098, 2.5686, 0.888672)
 shape = SubResource("BoxShape3D_qs62n")
 
+[node name="Timer" type="Timer" parent="Helicopter/Area3D"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Helicopter"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, -39.1)
+visible = false
+mesh = SubResource("BoxMesh_vqwpn")
+material = SubResource("StandardMaterial3D_wnch0")
+
 [connection signal="timeout" from="GroundSpawner/Timer" to="GroundSpawner" method="_on_timer_timeout"]
+[connection signal="area_entered" from="Helicopter/Area3D" to="Helicopter/Area3D" method="_on_area_entered"]
+[connection signal="timeout" from="Helicopter/Area3D/Timer" to="Helicopter/Area3D" method="_on_timer_timeout"]
