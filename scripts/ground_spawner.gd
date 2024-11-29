@@ -43,7 +43,7 @@ var occupied_cover_cells = {}
 var z_offset = 0
 var delete_threshold = 100
 var tile_counter = -3
-var stop_game = false
+var stop_game = Global.stop
 #tile
 
 #Cover
@@ -90,6 +90,7 @@ var occupied_obstacle_cells = {}
 
 func _ready():
 	SignalBus.connect("caught", Callable(self, "_on_player_caught"))
+	SignalBus.connect("swapping", start_game)
 	#Prepares the materials
 	var material1 = StandardMaterial3D.new()
 	material1.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_01.png")
@@ -107,6 +108,8 @@ func _ready():
 	current_season = full_seasons[rng.randi_range(0, full_seasons.size() - 1)]
 	for i in range(starting_tile_amount):
 		spawn_tile()
+	
+
 
 func new_noise_seed():
 	cover_noise = FastNoiseLite.new()
@@ -438,6 +441,15 @@ func check_new_seed():
 	if accumulated_z_distance >= max_noise_range:
 		accumulated_z_distance = 0.0
 		new_noise_seed()
+
+func start_game() -> void:
+	await get_tree().create_timer(0.5).timeout
+	SignalBus.emit_signal("moveystart", get_tree().get_nodes_in_group("First Bush")[0])
+	await get_tree().create_timer(1.5).timeout
+	$Timer.start()
+	for spotlight in get_tree().get_nodes_in_group("spotlights"):
+		spotlight.visible = true
+	stop_game = false
 
 func _on_timer_timeout() -> void:
 	speed *= 1.2

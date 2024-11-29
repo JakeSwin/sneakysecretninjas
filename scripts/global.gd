@@ -1,6 +1,6 @@
 extends Node
 var smoked = false
-
+var stop = true
 var leaderboard = []
 
 #func save(content):

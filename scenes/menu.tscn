@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c16x6y38q2woj"]
+[gd_scene load_steps=5 format=3 uid="uid://c16x6y38q2woj"]
 
 [ext_resource type="FontFile" uid="uid://chy56ut33g38" path="res://assets/font/AsianNinja-z874L.ttf" id="1_srv4e"]
 [ext_resource type="Script" path="res://scripts/button.gd" id="2_8wcot"]
-[ext_resource type="Script" path="res://scripts/leaderboardbutton.gd" id="3_sfl5t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aaj6s"]
 bg_color = Color(1, 0.270971, 0.598001, 1)
@@ -41,7 +40,7 @@ theme_override_fonts/font = ExtResource("1_srv4e")
 theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_v63ma")
 text = "Leaderboard"
-script = ExtResource("3_sfl5t")
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button" method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]

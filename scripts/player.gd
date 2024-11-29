@@ -20,6 +20,7 @@ var ninja: Node
 func _ready() -> void:
 	$AnimationPlayer.play("hide") # Hiding
 	SignalBus.connect("move_player_to", set_move_target)
+	SignalBus.connect("moveystart", set_move_target)
 	SignalBus.connect("seen_by", change_visiblity)
 	ninja = get_tree().get_nodes_in_group("ninja")[0]
 

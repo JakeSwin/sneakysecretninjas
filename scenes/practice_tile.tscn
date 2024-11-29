@@ -23,5 +23,5 @@ mesh = SubResource("BoxMesh_h5h1k")
 surface_material_override/0 = SubResource("StandardMaterial3D_d645k")
 script = ExtResource("2_wddu4")
 
-[node name="Starting Tile" parent="." instance=ExtResource("3_wdr3a")]
+[node name="Starting Tile" parent="." groups=["First Bush"] instance=ExtResource("3_wdr3a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116472, 4.76837e-07, -2.25199)

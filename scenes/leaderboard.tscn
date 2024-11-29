@@ -109,3 +109,16 @@ label_settings = SubResource("LabelSettings_tf1of")
 
 [node name="SaverLoader" type="Node" parent="."]
 script = ExtResource("3_v2x6n")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 725.0
+offset_top = 442.0
+offset_right = 1151.0
+offset_bottom = 651.0
+theme_override_fonts/font = ExtResource("2_mraq4")
+theme_override_font_sizes/font_size = 200
+text = "Menu"
+
+[connection signal="pressed" from="Button" to="Label" method="_on_button_pressed"]

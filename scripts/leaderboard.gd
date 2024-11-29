@@ -13,3 +13,53 @@ func _ready():
 	$"../Label8".text = Global.leaderboard[7]
 	$"../Label9".text = Global.leaderboard[8]
 	$"../Label10".text = Global.leaderboard[9]
+	$"../TopText".visible = false
+	$".".visible = false
+	$"../Label2".visible = false
+	$"../Label3".visible = false
+	$"../Label4".visible = false
+	$"../Label5".visible = false
+	$"../Label6".visible = false
+	$"../Label7".visible = false
+	$"../Label8".visible = false
+	$"../Label9".visible = false
+	$"../Label10".visible = false
+	
+	SignalBus.connect("leaderswap", vanish)
+	SignalBus.connect("gobackiwanttobemonke", unvanish)
+
+func vanish():
+	$"../TopText".visible = true
+	$".".visible = true
+	$"../Label2".visible = true
+	$"../Label3".visible = true
+	$"../Label4".visible = true
+	$"../Label5".visible = true
+	$"../Label6".visible = true
+	$"../Label7".visible = true
+	$"../Label8".visible = true
+	$"../Label9".visible = true
+	$"../Label10".visible = true
+	$"../Button".visible = true
+
+
+	
+
+func unvanish():
+	$"../TopText".visible = false
+	$".".visible = false
+	$"../Label2".visible = false
+	$"../Label3".visible = false
+	$"../Label4".visible = false
+	$"../Label5".visible = false
+	$"../Label6".visible = false
+	$"../Label7".visible = false
+	$"../Label8".visible = false
+	$"../Label9".visible = false
+	$"../Label10".visible = false
+	$"../Button".visible = false
+
+
+func _on_button_pressed() -> void:
+	SignalBus.emit_signal("gobackiwanttobemonke")
+	print("Signal Emitted")

@@ -14,8 +14,8 @@ emission_ring_inner_radius = 0.1
 angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 gravity = Vector3(0, 0, 0)
-radial_accel_min = 2.5
-radial_accel_max = 2.5
+radial_accel_min = 5.0
+radial_accel_max = 5.0
 color_ramp = SubResource("GradientTexture1D_g6a0w")
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xpq4n"]
