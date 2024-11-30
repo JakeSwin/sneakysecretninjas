@@ -92,13 +92,13 @@ func _ready():
 	SignalBus.connect("caught", Callable(self, "_on_player_caught"))
 	#Prepares the materials
 	var material1 = StandardMaterial3D.new()
-	material1.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_01.png")
+	material1.albedo_texture = load("Synty_assets/Synty_assets_textures/PolygonNature_01.png")
 	var material2 = StandardMaterial3D.new()
-	material2.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_02.png")
+	material2.albedo_texture = load("Synty_assets/Synty_assets_textures/PolygonNature_02.png")
 	var material3 = StandardMaterial3D.new()
-	material3.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_03.png")
+	material3.albedo_texture = load("Synty_assets/Synty_assets_textures/PolygonNature_03.png")
 	var material4 = StandardMaterial3D.new()
-	material4.albedo_texture = load("res://Synty_assets/Synty_assets_textures/PolygonNature_04.png")
+	material4.albedo_texture = load("Synty_assets/Synty_assets_textures/PolygonNature_04.png")
 	materials = [material1, material2, material3, material4]
 	
 	#Creates random noises, spawn intervals, tils and sets starting season
