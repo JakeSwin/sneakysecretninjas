@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0h3mwai2y4ju"]
 
-[ext_resource type="PackedScene" uid="uid://v6uqo63t8wh0" path="res://synty/SM_Prop_Skull_01.fbx" id="1_huggw"]
+[ext_resource type="PackedScene" uid="uid://v6uqo63t8wh0" path="res://Synty_assets/SM_Prop_Skull_01.fbx" id="1_huggw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dgf5a"]
 albedo_color = Color(0.92549, 0.807843, 0, 1)

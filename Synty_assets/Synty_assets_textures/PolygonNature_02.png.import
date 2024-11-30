@@ -4,16 +4,15 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnctr3ix301k5"
 path.s3tc="res://.godot/imported/PolygonNature_02.png-6bc6d59354ae96c4361b7752c42a06c4.s3tc.ctex"
-path.etc2="res://.godot/imported/PolygonNature_02.png-6bc6d59354ae96c4361b7752c42a06c4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Synty_assets/Synty_assets_textures/PolygonNature_02.png"
-dest_files=["res://.godot/imported/PolygonNature_02.png-6bc6d59354ae96c4361b7752c42a06c4.s3tc.ctex", "res://.godot/imported/PolygonNature_02.png-6bc6d59354ae96c4361b7752c42a06c4.etc2.ctex"]
+dest_files=["res://.godot/imported/PolygonNature_02.png-6bc6d59354ae96c4361b7752c42a06c4.s3tc.ctex"]
 
 [params]
 
