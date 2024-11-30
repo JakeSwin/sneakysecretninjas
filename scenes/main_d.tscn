@@ -78,7 +78,7 @@ script = ExtResource("1_xl2vg")
 spotlight_scene = ExtResource("2_ns3t7")
 
 [node name="Timer" type="Timer" parent="GroundSpawner"]
-wait_time = 5.0
+wait_time = 2.0
 
 [node name="Ninja start" type="Node3D" parent="."]
 
