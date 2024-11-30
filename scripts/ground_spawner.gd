@@ -46,6 +46,12 @@ var tile_counter = -3
 var stop_game = Global.stop
 #tile
 
+#test
+var max_speed = 30.0
+var growth_rate = 0.5
+var time_elapsed = 0.0
+#test
+
 #Cover
 var cover = [
 	preload("res://scenes/bush_1.tscn"),
@@ -456,4 +462,7 @@ func start_game() -> void:
 	stop_game = false
 
 func _on_timer_timeout() -> void:
-	speed *= 1.2
+	if speed < max_speed:
+		speed += growth_rate * (1 - speed / max_speed)
+	print("New speed: ", speed)
+	#speed *= 1.2
