@@ -84,7 +84,7 @@ shape = SubResource("CapsuleShape3D_ywewd")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("3_uej5e")
-volume_db = 5.0
+volume_db = 1.0
 
 [node name="DashSphere" type="CSGSphere3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
