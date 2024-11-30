@@ -5,9 +5,9 @@ extends Node3D
 
 @onready var alert_sound = $AudioStreamPlayer
 @onready var dash_particles: GPUParticles3D = $DashParticles
-@onready var smoke_particles: GPUParticles3D = $SmokeParticles
-@onready var smoke_particles_2: GPUParticles3D = $SmokeParticles2
-@onready var smoke_particles_3: GPUParticles3D = $SmokeParticles3
+@onready var smoke_particles: CPUParticles3D = $SmokeParticles
+@onready var smoke_particles_2: CPUParticles3D = $SmokeParticles2
+@onready var smoke_particles_3: CPUParticles3D = $SmokeParticles3
 
 var lerp_weight = 0.1
 var moving: bool = false

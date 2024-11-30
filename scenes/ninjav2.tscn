@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://uptq2n8o2dcl"]
+[gd_scene load_steps=10 format=3 uid="uid://uptq2n8o2dcl"]
 
 [ext_resource type="PackedScene" uid="uid://b3i8hgs8qrqiw" path="res://assets/NinjaV2.gltf" id="1_u5v6a"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_prhj3"]
@@ -22,10 +22,6 @@ albedo_color = Color(0.490719, 0.549691, 0.640099, 0.666667)
 [sub_resource type="BoxMesh" id="BoxMesh_m8yfn"]
 material = SubResource("StandardMaterial3D_lrsox")
 size = Vector3(0.05, 1, 0.05)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o4y8r"]
-gravity = Vector3(0, 10, 0)
-turbulence_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbhgw"]
 albedo_color = Color(1, 0, 0, 1)
@@ -102,16 +98,17 @@ lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_4bkm5")
 draw_pass_1 = SubResource("BoxMesh_m8yfn")
 
-[node name="SmokeParticles" type="GPUParticles3D" parent="." index="6"]
+[node name="SmokeParticles" type="CPUParticles3D" parent="." index="6"]
 layers = 2
 emitting = false
 amount = 4
 one_shot = true
 randomness = 1.0
+fixed_fps = 30
 visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_o4y8r")
-draw_pass_1 = SubResource("SphereMesh_gbuyr")
+mesh = SubResource("SphereMesh_gbuyr")
+gravity = Vector3(0, 10, 0)
 
 [node name="NinjaArea" type="Area3D" parent="." index="7"]
 
@@ -119,24 +116,26 @@ draw_pass_1 = SubResource("SphereMesh_gbuyr")
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.8, 0)
 shape = SubResource("CapsuleShape3D_ywewd")
 
-[node name="SmokeParticles2" type="GPUParticles3D" parent="." index="8"]
+[node name="SmokeParticles2" type="CPUParticles3D" parent="." index="8"]
 layers = 2
 emitting = false
 amount = 4
 one_shot = true
 randomness = 1.0
+fixed_fps = 30
 visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_o4y8r")
-draw_pass_1 = SubResource("SphereMesh_gbuyr")
+mesh = SubResource("SphereMesh_gbuyr")
+gravity = Vector3(0, 10, 0)
 
-[node name="SmokeParticles3" type="GPUParticles3D" parent="." index="9"]
+[node name="SmokeParticles3" type="CPUParticles3D" parent="." index="9"]
 layers = 2
 emitting = false
 amount = 4
 one_shot = true
 randomness = 1.0
+fixed_fps = 30
 visibility_aabb = AABB(0, 0, 0, 8, 8, 8)
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_o4y8r")
-draw_pass_1 = SubResource("SphereMesh_gbuyr")
+mesh = SubResource("SphereMesh_gbuyr")
+gravity = Vector3(0, 10, 0)
