@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4ieqh5kx13a2"]
+[gd_scene load_steps=4 format=3 uid="uid://dhujk2fkp3dvt"]
 
 [ext_resource type="PackedScene" uid="uid://baklagwuomlx" path="res://assets/Guard.gltf" id="1_0f5rj"]
-[ext_resource type="PackedScene" uid="uid://inh1k3tn3868" path="res://scenes/spotlight.tscn" id="2_eims0"]
+[ext_resource type="PackedScene" uid="uid://choeqtgqnic36" path="res://scenes/spotlight.tscn" id="2_eims0"]
 [ext_resource type="Script" path="res://scripts/guard.gd" id="2_flj80"]
 
 [node name="guard" instance=ExtResource("1_0f5rj")]

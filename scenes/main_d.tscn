@@ -36,9 +36,6 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_lhvmu"]
 size = Vector3(1, 20, 500)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qs62n"]
-size = Vector3(31.02, 6.13721, 2.77734)
-
 [sub_resource type="BoxMesh" id="BoxMesh_vqwpn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wnch0"]
@@ -46,6 +43,9 @@ transparency = 1
 emission_enabled = true
 emission = Color(1, 0.94075, 0.329242, 1)
 emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qs62n"]
+size = Vector3(31.02, 8, 2.77734)
 
 [node name="Main" type="Node3D"]
 
@@ -123,12 +123,21 @@ mesh = SubResource("BoxMesh_lhvmu")
 
 [node name="Helicopter" type="Node" parent="."]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Helicopter"]
+transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, -39.1)
+visible = false
+mesh = SubResource("BoxMesh_vqwpn")
+material = SubResource("StandardMaterial3D_wnch0")
+
+[node name="HelicopterArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37)
+input_ray_pickable = false
+monitoring = false
+monitorable = false
 script = ExtResource("5_ajdqg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100098, 2.5686, 0.888672)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HelicopterArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100098, 1.6372, -0.111328)
 shape = SubResource("BoxShape3D_qs62n")
 
 [node name="Spotlights" type="Node3D" parent="."]
@@ -167,17 +176,5 @@ spot_angle = 44.6794
 
 [node name="Leaderboard" parent="." instance=ExtResource("8_owa58")]
 
-[node name="Timer" type="Timer" parent="Helicopter/Area3D"]
-wait_time = 5.0
-one_shot = true
-autostart = true
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="Helicopter"]
-transform = Transform3D(20, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, -39.1)
-visible = false
-mesh = SubResource("BoxMesh_vqwpn")
-material = SubResource("StandardMaterial3D_wnch0")
-
 [connection signal="timeout" from="GroundSpawner/Timer" to="GroundSpawner" method="_on_timer_timeout"]
-[connection signal="area_entered" from="Helicopter/Area3D" to="Helicopter/Area3D" method="_on_area_entered"]
-[connection signal="timeout" from="Helicopter/Area3D/Timer" to="Helicopter/Area3D" method="_on_timer_timeout"]
+[connection signal="area_entered" from="HelicopterArea" to="HelicopterArea" method="_on_area_entered"]

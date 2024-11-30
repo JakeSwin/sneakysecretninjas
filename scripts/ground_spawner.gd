@@ -88,6 +88,8 @@ var guard_points = preload("res://Synty_assets/rock_1.tscn")
 var occupied_obstacle_cells = {}
 #obsticles
 
+@onready var helicopter_area: Area3D = $"../HelicopterArea"
+
 func _ready():
 	SignalBus.connect("caught", Callable(self, "_on_player_caught"))
 	SignalBus.connect("swapping", start_game)
@@ -449,6 +451,8 @@ func start_game() -> void:
 	$Timer.start()
 	for spotlight in get_tree().get_nodes_in_group("spotlights"):
 		spotlight.visible = true
+		helicopter_area.monitorable = true
+		helicopter_area.monitoring = true
 	stop_game = false
 
 func _on_timer_timeout() -> void:
