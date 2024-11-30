@@ -5,12 +5,10 @@ extends VBoxContainer
 func _ready() -> void:
 	SignalBus.connect("caught", lecatched)
 	$Label.visible = false
-	$Button.visible = false
 	$Button2.visible = false
 
 func lecatched(player_object):
 	$Label.visible = true
-	$Button.visible = true
 	$Button2.visible = true
 	$"../../VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer".stop()
 	$"../../VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer2".stop()

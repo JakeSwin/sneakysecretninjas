@@ -18,7 +18,7 @@ func _on_timer_timeout() -> void:
 func timering():
 	var min = int(elapsed_time) / 60
 	var sec = int(elapsed_time) % 60
-	$".".text = "%02d:%02d" % [min, sec]
+	text = "%02d:%02d" % [min, sec]
 
 func urcaught(player_object):
 	$Timer.stop()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ck8tl13xwn1cb"]
+[gd_scene load_steps=6 format=3 uid="uid://ck8tl13xwn1cb"]
 
 [ext_resource type="Gradient" uid="uid://kqn1g0fvi3gh" path="res://assets/gradient.tres" id="1_j0khp"]
 
@@ -18,11 +18,8 @@ radial_accel_min = 5.0
 radial_accel_max = 5.0
 color_ramp = SubResource("GradientTexture1D_g6a0w")
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_xpq4n"]
-gradient = ExtResource("1_j0khp")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvjon"]
-albedo_texture = SubResource("GradientTexture1D_xpq4n")
+albedo_color = Color(1, 0, 0, 0.792157)
 
 [sub_resource type="SphereMesh" id="SphereMesh_2x1pa"]
 material = SubResource("StandardMaterial3D_tvjon")
@@ -31,7 +28,7 @@ height = 0.1
 
 [node name="GPUParticles3D" type="GPUParticles3D"]
 emitting = false
-amount = 200
+amount = 100
 one_shot = true
 explosiveness = 1.0
 visibility_aabb = AABB(1, 1, 1, 8, 8, 8)

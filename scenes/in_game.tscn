@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://hflp43gvv8km"]
+[gd_scene load_steps=12 format=3 uid="uid://hflp43gvv8km"]
 
 [ext_resource type="Script" path="res://scripts/smoke_bomb.gd" id="2_rgn3x"]
 [ext_resource type="Texture2D" uid="uid://l8gue77fnqyp" path="res://assets/6319455.png" id="3_k8ddx"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/SaveData.gd" id="6_85csr"]
 [ext_resource type="FontFile" uid="uid://chy56ut33g38" path="res://assets/font/AsianNinja-z874L.ttf" id="7_fxngj"]
 [ext_resource type="Script" path="res://scripts/v_box_container_2.gd" id="7_wm74y"]
-[ext_resource type="Script" path="res://scripts/lebutton.gd" id="9_dofrt"]
 [ext_resource type="Script" path="res://scripts/menubutton.gd" id="9_qypjf"]
 
 [sub_resource type="Shortcut" id="Shortcut_vy1b1"]
@@ -14,7 +13,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7j4te"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1rmh"]
-bg_color = Color(0.21, 0.21, 0.21, 0.462745)
+bg_color = Color(0, 0, 0, 0.643137)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b1x8o"]
 font = ExtResource("7_fxngj")
@@ -72,7 +71,7 @@ offset_right = 55.0
 offset_bottom = 52.0
 
 [node name="Timer" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
-wait_time = 2.0
+wait_time = 10.0
 one_shot = true
 
 [node name="Timer2" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
@@ -80,19 +79,6 @@ wait_time = 0.1
 
 [node name="Timer3" type="Timer" parent="VBoxContainer/HBoxContainer/SmokeBomb/Label"]
 wait_time = 2.0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 464.0
-offset_top = 2.0
-offset_right = 698.0
-offset_bottom = 61.0
-script = ExtResource("5_8h54k")
-
-[node name="Timer" type="Timer" parent="Label"]
-
-[node name="SaverLoader" type="Node" parent="."]
-script = ExtResource("6_85csr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -119,13 +105,6 @@ layout_mode = 2
 text = "You were caught!"
 label_settings = SubResource("LabelSettings_b1x8o")
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer2"]
-visible = false
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_fxngj")
-text = "Retry"
-script = ExtResource("9_dofrt")
-
 [node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer2"]
 visible = false
 layout_mode = 2
@@ -133,10 +112,31 @@ theme_override_fonts/font = ExtResource("7_fxngj")
 text = "Return to menu"
 script = ExtResource("9_qypjf")
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.05
+offset_bottom = 617.6
+mouse_filter = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+script = ExtResource("5_8h54k")
+
+[node name="Timer" type="Timer" parent="VBoxContainer2/HBoxContainer2/Label"]
+
+[node name="SaverLoader" type="Node" parent="VBoxContainer2/HBoxContainer2"]
+script = ExtResource("6_85csr")
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SmokeBomb" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_pressed"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_timeout"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer2" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_2_timeout"]
 [connection signal="timeout" from="VBoxContainer/HBoxContainer/SmokeBomb/Label/Timer3" to="VBoxContainer/HBoxContainer/SmokeBomb" method="_on_timer_3_timeout"]
-[connection signal="timeout" from="Label/Timer" to="Label" method="_on_timer_timeout"]
-[connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button" to="HBoxContainer/VBoxContainer2/Button" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer2/Button2" to="HBoxContainer/VBoxContainer2/Button2" method="_on_pressed"]
+[connection signal="timeout" from="VBoxContainer2/HBoxContainer2/Label/Timer" to="VBoxContainer2/HBoxContainer2/Label" method="_on_timer_timeout"]

@@ -4,9 +4,18 @@
 [ext_resource type="Script" path="res://scripts/button.gd" id="2_8wcot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aaj6s"]
-bg_color = Color(1, 0.270971, 0.598001, 1)
+content_margin_left = 0.0
+content_margin_top = 15.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.270588, 0.596078, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v63ma"]
+content_margin_left = 0.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 12.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -16,31 +25,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 98.0
-offset_right = 486.0
-offset_bottom = 249.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_right = -566.0
+offset_bottom = 0.295959
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.588265, 1, 0.857895, 1)
 theme_override_fonts/font = ExtResource("1_srv4e")
-theme_override_font_sizes/font_size = 150
+theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_aaj6s")
 text = "Play"
+icon_alignment = 1
 script = ExtResource("2_8wcot")
 
-[node name="Button2" type="Button" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 299.0
-offset_right = 486.0
-offset_bottom = 451.0
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.588235, 1, 0.858824, 1)
 theme_override_fonts/font = ExtResource("1_srv4e")
 theme_override_font_sizes/font_size = 75
 theme_override_styles/normal = SubResource("StyleBoxFlat_v63ma")
 text = "Leaderboard"
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
-[connection signal="pressed" from="Button2" to="Button" method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="HBoxContainer/VBoxContainer/Button" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button2" to="HBoxContainer/VBoxContainer/Button" method="_on_button_2_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button2" to="HBoxContainer/VBoxContainer/Button2" method="_on_pressed"]

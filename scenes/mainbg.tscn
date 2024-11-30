@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="3_jp8jp"]
 [ext_resource type="PackedScene" uid="uid://c16x6y38q2woj" path="res://scenes/menu.tscn" id="4_m28ih"]
 [ext_resource type="Script" path="res://scripts/follow_path.gd" id="5_hliqy"]
-[ext_resource type="PackedScene" uid="uid://d4ieqh5kx13a2" path="res://scenes/guard.tscn" id="6_whgoc"]
+[ext_resource type="PackedScene" uid="uid://dhujk2fkp3dvt" path="res://scenes/guard.tscn" id="6_whgoc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x2ljx"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
