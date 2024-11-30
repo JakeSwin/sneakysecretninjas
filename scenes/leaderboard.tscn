@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl8m7cuio8sv0"]
+[gd_scene load_steps=5 format=3 uid="uid://dl8m7cuio8sv0"]
 
 [ext_resource type="Script" path="res://scripts/leaderboard.gd" id="1_ivc7s"]
 [ext_resource type="FontFile" uid="uid://chy56ut33g38" path="res://assets/font/AsianNinja-z874L.ttf" id="2_mraq4"]
+[ext_resource type="Script" path="res://scripts/SaveData.gd" id="3_v2x6n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_tf1of"]
 font = ExtResource("2_mraq4")
@@ -15,9 +16,109 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="." groups=["Persist"]]
+[node name="TopText" type="Label" parent="."]
 layout_mode = 0
-offset_right = 586.0
-offset_bottom = 645.0
+offset_left = 471.0
+offset_top = 7.0
+offset_right = 683.0
+offset_bottom = 72.0
+theme_override_fonts/font = ExtResource("2_mraq4")
+theme_override_font_sizes/font_size = 50
+text = "Top Scores"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 72.0
+offset_right = 711.0
+offset_bottom = 128.0
 label_settings = SubResource("LabelSettings_tf1of")
 script = ExtResource("1_ivc7s")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 136.0
+offset_right = 711.0
+offset_bottom = 192.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 203.0
+offset_right = 711.0
+offset_bottom = 259.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 270.0
+offset_right = 711.0
+offset_bottom = 326.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 337.0
+offset_right = 711.0
+offset_bottom = 393.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 69.0
+offset_right = 843.0
+offset_bottom = 125.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 136.0
+offset_right = 843.0
+offset_bottom = 192.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 203.0
+offset_right = 843.0
+offset_bottom = 259.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label9" type="Label" parent="."]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 270.0
+offset_right = 843.0
+offset_bottom = 326.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="Label10" type="Label" parent="."]
+layout_mode = 0
+offset_left = 567.0
+offset_top = 337.0
+offset_right = 843.0
+offset_bottom = 393.0
+label_settings = SubResource("LabelSettings_tf1of")
+
+[node name="SaverLoader" type="Node" parent="."]
+script = ExtResource("3_v2x6n")
+
+[node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 725.0
+offset_top = 442.0
+offset_right = 1151.0
+offset_bottom = 651.0
+theme_override_fonts/font = ExtResource("2_mraq4")
+theme_override_font_sizes/font_size = 200
+text = "Menu"
+
+[connection signal="pressed" from="Button" to="Label" method="_on_button_pressed"]

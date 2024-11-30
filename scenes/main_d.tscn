@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8xex23fcqoug"]
+[gd_scene load_steps=17 format=3 uid="uid://c8xex23fcqoug"]
 
+[ext_resource type="PackedScene" uid="uid://c16x6y38q2woj" path="res://scenes/menu.tscn" id="1_jw4ik"]
 [ext_resource type="Script" path="res://scripts/ground_spawner.gd" id="1_xl2vg"]
 [ext_resource type="PackedScene" uid="uid://uptq2n8o2dcl" path="res://scenes/ninjav2.tscn" id="2_04yp1"]
 [ext_resource type="PackedScene" uid="uid://choeqtgqnic36" path="res://scenes/spotlight.tscn" id="2_ns3t7"]
+[ext_resource type="Script" path="res://scripts/camera_3d.gd" id="2_sw8v3"]
 [ext_resource type="PackedScene" uid="uid://hflp43gvv8km" path="res://scenes/in_game.tscn" id="4_3ul47"]
 [ext_resource type="Script" path="res://scripts/helicopter.gd" id="5_ajdqg"]
+[ext_resource type="PackedScene" uid="uid://dl8m7cuio8sv0" path="res://scenes/leaderboard.tscn" id="8_owa58"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cq3bw"]
 sky_top_color = Color(0.202812, 0.248452, 0.311925, 1)
@@ -46,18 +49,29 @@ emission_energy_multiplier = 5.0
 
 [node name="Main" type="Node3D"]
 
+[node name="Control2" parent="." instance=ExtResource("1_jw4ik")]
+mouse_filter = 2
+
 [node name="CameraPivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.743144, 0.66913, 0, -0.66913, 0.743144, 0, 9, -37.8206)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -2.98023e-08, 1, 0.00861645, 0.0125122, -0.013896)
-current = true
+script = ExtResource("2_sw8v3")
 
 [node name="CameraPivot2" type="Marker3D" parent="."]
-transform = Transform3D(0.692143, -0.231405, 0.683658, 0, 0.947209, 0.320613, -0.72176, -0.22191, 0.655604, 2.64797, 3.23222, -8.70734)
+transform = Transform3D(0.692143, 0.231405, -0.683658, 0, 0.947209, 0.320613, 0.72176, -0.22191, 0.655604, 2.64797, 3.23222, -8.70734)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot2"]
 transform = Transform3D(1, -1.49012e-08, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.0413256, -0.00304413, 0.0089941)
+current = true
+
+[node name="CameraPivot3" type="Marker3D" parent="."]
+transform = Transform3D(0.692143, -0.231405, 0.683658, 0, 0.947209, 0.320613, -0.72176, -0.22191, 0.655604, 2.64797, 3.23222, -8.70734)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot3"]
+transform = Transform3D(1, -1.49012e-08, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.0413256, -0.00304413, 0.0089941)
+current = true
 
 [node name="GroundSpawner" type="Node3D" parent="."]
 script = ExtResource("1_xl2vg")
@@ -65,7 +79,6 @@ spotlight_scene = ExtResource("2_ns3t7")
 
 [node name="Timer" type="Timer" parent="GroundSpawner"]
 wait_time = 5.0
-autostart = true
 
 [node name="Ninja start" type="Node3D" parent="."]
 
@@ -110,44 +123,49 @@ mesh = SubResource("BoxMesh_lhvmu")
 
 [node name="Helicopter" type="Node" parent="."]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Helicopter"]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 2, 4, -37)
-light_color = Color(0.96251, 0.961126, 0, 1)
-light_energy = 20.0
-spot_range = 5.81319
-spot_angle = 44.6794
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Helicopter"]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 6, 4, -37)
-light_color = Color(0.96251, 0.961126, 0, 1)
-light_energy = 20.0
-spot_range = 5.81319
-spot_angle = 44.6794
-
-[node name="SpotLight3D3" type="SpotLight3D" parent="Helicopter"]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -2, 4, -37)
-light_color = Color(0.96251, 0.961126, 0, 1)
-light_energy = 20.0
-spot_range = 5.81319
-spot_angle = 44.6794
-
-[node name="SpotLight3D4" type="SpotLight3D" parent="Helicopter"]
-transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -6, 4, -37)
-light_color = Color(0.96251, 0.961126, 0, 1)
-light_energy = 20.0
-spot_range = 5.81319
-spot_angle = 44.6794
-
-[node name="Area3D" type="Area3D" parent="Helicopter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -38)
-input_ray_pickable = false
-monitoring = false
-monitorable = false
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -37)
 script = ExtResource("5_ajdqg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Helicopter/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0100098, 2.5686, 0.888672)
 shape = SubResource("BoxShape3D_qs62n")
+
+[node name="Spotlights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Spotlights" groups=["spotlights"]]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 2, 4, -37)
+visible = false
+light_color = Color(0.96251, 0.961126, 0, 1)
+light_energy = 20.0
+spot_range = 5.81319
+spot_angle = 44.6794
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Spotlights" groups=["spotlights"]]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, 8, 4, -37)
+visible = false
+light_color = Color(0.96251, 0.961126, 0, 1)
+light_energy = 20.0
+spot_range = 5.81319
+spot_angle = 44.6794
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Spotlights" groups=["spotlights"]]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -2, 4, -37)
+visible = false
+light_color = Color(0.96251, 0.961126, 0, 1)
+light_energy = 20.0
+spot_range = 5.81319
+spot_angle = 44.6794
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Spotlights" groups=["spotlights"]]
+transform = Transform3D(1, -1.91069e-15, -8.35189e-23, 0, -4.37114e-08, 1, -1.91069e-15, -1, -4.37114e-08, -8, 4, -37)
+visible = false
+light_color = Color(0.96251, 0.961126, 0, 1)
+light_energy = 20.0
+spot_range = 5.81319
+spot_angle = 44.6794
+
+[node name="Leaderboard" parent="." instance=ExtResource("8_owa58")]
 
 [node name="Timer" type="Timer" parent="Helicopter/Area3D"]
 wait_time = 5.0

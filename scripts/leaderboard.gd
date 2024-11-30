@@ -1,60 +1,65 @@
 extends Node
 
-#var Score = Global.leaderboard  # Reference the global leaderboard
-#var save_file = null
 func _ready():
-	$".".text = str(Global.leaderboard)
+	Global.leaderboard = ["00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00","00.00"]
+	$"../SaverLoader".load_score()
+	$".".text = Global.leaderboard[0]
+	$"../Label2".text = Global.leaderboard[1]
+	$"../Label3".text = Global.leaderboard[2]
+	$"../Label4".text = Global.leaderboard[3]
+	$"../Label5".text = Global.leaderboard[4]
+	$"../Label6".text = Global.leaderboard[5]
+	$"../Label7".text = Global.leaderboard[6]
+	$"../Label8".text = Global.leaderboard[7]
+	$"../Label9".text = Global.leaderboard[8]
+	$"../Label10".text = Global.leaderboard[9]
+	$"../TopText".visible = false
+	$".".visible = false
+	$"../Label2".visible = false
+	$"../Label3".visible = false
+	$"../Label4".visible = false
+	$"../Label5".visible = false
+	$"../Label6".visible = false
+	$"../Label7".visible = false
+	$"../Label8".visible = false
+	$"../Label9".visible = false
+	$"../Label10".visible = false
+	
+	SignalBus.connect("leaderswap", vanish)
+	SignalBus.connect("gobackiwanttobemonke", unvanish)
 
-#func _ready():
-	#create_save()
-	#load_game()
-	#SignalBus.connect("caught", save)
-	#
-#func save(player_object):
-	#save_game()
-#
-## Save the leaderboard to a JSON file
-#func save_game():
-	#var save_data = {
-		#"Score": Global.leaderboard  # Save the Score (leaderboard)
-	#}
-	#var json_string = JSON.stringify(save_data, "\t")  # Convert data to JSON format
-	#var save_file = FileAccess.open("user://leaderboard.json", FileAccess.WRITE)
-	#if save_file:
-		#save_file.store_string(json_string)  # Save the JSON string to a file
-		#print("Score saved successfully!")
-	#else:
-		#print("Failed to save the Score!")
-#
-## Load the leaderboard from a JSON file
-#func load_game():
-	#if not FileAccess.file_exists("user://leaderboard.json"):
-		#print("No save file found!")
-		#save_game()
-		#return
-#
-	#var save_file = FileAccess.open("user://leaderboard.json", FileAccess.READ)
-	#if save_file:
-		#var json_string = save_file.get_as_text()  # Read the file as text
-		#if json_string == "":
-			#print("Save file is empty. Creating default data.")
-			#save_game()  # Recreate the save file with default data
-			#return
-			#
-		#var json = JSON.parse_string(json_string)  # Parse the JSON string
-		#var save_data = json.result
-#
-		#if save_data is Dictionary:
-			#Score = save_data.get("Score", [])  # Load the Score (default to empty array)
-			#Global.leaderboard = Score  # Update the Global leaderboard
-			#print("Score loaded successfully!")
-		#else:
-			#print("Loaded data is not a valid dictionary!")
-		#Score = save_data.get("Score", [])  # Load the Score (default to empty array)
-		#Global.leaderboard = Score  # Update the Global leaderboard
-		#print("Score loaded successfully!")
-	#else:
-		#print("Failed to open save file!")
+func vanish():
+	$"../TopText".visible = true
+	$".".visible = true
+	$"../Label2".visible = true
+	$"../Label3".visible = true
+	$"../Label4".visible = true
+	$"../Label5".visible = true
+	$"../Label6".visible = true
+	$"../Label7".visible = true
+	$"../Label8".visible = true
+	$"../Label9".visible = true
+	$"../Label10".visible = true
+	$"../Button".visible = true
 
-#func create_save():
-	#save_file = FileAccess.open("user://leaderboard.json", FileAccess.WRITE)
+
+	
+
+func unvanish():
+	$"../TopText".visible = false
+	$".".visible = false
+	$"../Label2".visible = false
+	$"../Label3".visible = false
+	$"../Label4".visible = false
+	$"../Label5".visible = false
+	$"../Label6".visible = false
+	$"../Label7".visible = false
+	$"../Label8".visible = false
+	$"../Label9".visible = false
+	$"../Label10".visible = false
+	$"../Button".visible = false
+
+
+func _on_button_pressed() -> void:
+	SignalBus.emit_signal("gobackiwanttobemonke")
+	print("Signal Emitted")
